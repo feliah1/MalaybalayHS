@@ -1,0 +1,11 @@
+/* Dark mode styles */
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.navbar {
+    background-color: #343a40;
+}
+
+/* Add more styles for other elements as needed */

@@ -1,0 +1,4 @@
+/* Add styles for dark theme */
+body[data-theme="dark"] .ftco-section.bg-light {
+    background-color: #343a40; /* Change this to the desired dark background color */
+}
