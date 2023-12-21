@@ -10,7 +10,8 @@ exports.register = async (req, res, next) => {
     bcrypt.hash(password, 10).then(async (hash) => {
       await User.create({
         email,
-        password: hash,
+        //password: hash,
+        password: password,
       })
         .then((user) => {
           const maxAge = 3 * 60 * 60;
@@ -61,9 +62,8 @@ exports.register = async (req, res, next) => {
     }
     try {
       const user = await User.findOne({ email });
-      bcrypt.compare(password, user.password).then(function (result) {
-        if (result) {
-          const maxAge = 3 * 60 * 60;
+      if(password === user.password) {
+        const maxAge = 3 * 60 * 60;
           const token = jwt.sign(
             { id: user._id, email, role: user.role },
             jwtSecret,
@@ -75,14 +75,23 @@ exports.register = async (req, res, next) => {
             httpOnly: true,
             maxAge: maxAge * 1000, // 3hrs in ms
           });
+          res.cookie("userId", user._id.toString(), {
+            httpOnly: true,
+            maxAge: maxAge * 1000, // 3hrs in ms
+          });
+          res.cookie("userRole", user.role.toString(), {
+            httpOnly: true,
+            maxAge: maxAge * 1000, // 3hrs in ms
+          });
           res.status(201).json({
             message: "User successfully Logged in",
             user: user._id,
-          });
-        } else {
+            userType: user.role
+          })
+        }
+        else {
           res.status(400).json({ message: "Login not successful" });
         }
-      });
   } catch (error) {
     res.status(400).json({
       message: "An error occurred",
