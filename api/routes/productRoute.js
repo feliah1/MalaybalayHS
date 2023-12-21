@@ -10,4 +10,5 @@ router.route("/getAllProd").get(getAllProducts)
 router.route("/getProd/:id").get(getProduct)
 router.route("/getProds").post(getProductsByIds)
 
+
 module.exports = router

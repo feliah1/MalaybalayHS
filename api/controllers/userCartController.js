@@ -1,5 +1,5 @@
 const UserCart = require("../models/userCart")
-const ItemInventoryController = require("./itemInventory")
+const Product = require("../models/productModel")
 const mongoose = require('mongoose');
 
 //checkout
@@ -19,9 +19,19 @@ exports.getCartOfUser = async (req, res) => {
     try {
         const userCart = await UserCart.find({ userId: new mongoose.Types.ObjectId(loggedInUserId) });// Retrieve all products without any filters
         const productIds = userCart.map(c => c.productId.toString());
-        const productDetails = ItemInventoryController.getProductsByIds("","");
 
-        res.json(productDetails); // Respond with all the products fetched
+            // Find a product by its _id
+        const obj_ids = productIds.map(function(id) { return new mongoose.Types.ObjectId(id); });
+        const products = await Product.find({_id: {$in: obj_ids}});
+        //no quantity fro now
+
+        const userCartProducts = {
+            'userCart': userCart,
+            'products': products
+        }
+        
+        // Respond with the found product
+        res.status(200).json({ userCartProducts });
 
     } catch (error) {
         res.status(500).json({ message: 'An error occurred', error: error.message });
