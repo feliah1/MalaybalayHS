@@ -1,5 +1,6 @@
 import bg_1 from './images/bg_1.png';
 import bg_2 from './images/bg_2.png';
+import placeholder from './images/product_2.png'
 
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
@@ -82,7 +83,7 @@ export default function Home() {
                                         state: { ProductId: product._id }
                                     }}
                                     >
-									<a href="#" className="img-prod"><img className="img-fluid" src={product.productImage} alt="Colorlib Template" />
+									<a href="#" className="img-prod"><img className="img-fluid" src={placeholder} alt="Colorlib Template" />
 										<div className="overlay"></div>
 									</a>
 									<div className="text py-3 pb-4 px-3">

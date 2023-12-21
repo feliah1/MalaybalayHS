@@ -467,7 +467,7 @@
 
 		// create stage
 		this.$stage = $('<' + this.settings.stageElement + ' class="' + this.settings.stageClass + '"/>')
-			.wrap('<div class="' + this.settings.stageOuterClass + '"/>');
+			.wrap('<div className="' + this.settings.stageOuterClass + '"/>');
 
 		// append stage
 		this.$element.append(this.$stage.parent());
