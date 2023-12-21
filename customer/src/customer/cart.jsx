@@ -15,6 +15,15 @@ export default function Cart() {
       const product_4Img = {
         backgroundImage: `url(${product_4})`,
       };
+
+	  const product ={
+		productName:'test value',
+		productImage: null,
+		price: 10,
+		category: 'car',
+		productStatus:'available',
+		description:'this is a car'
+	  }
     return (
       <>
           <div className="goto-here">

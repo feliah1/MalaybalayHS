@@ -1,32 +1,34 @@
 const Product = require("../models/productModel");
 
+const mongoose = require('mongoose');
+
 //create product
 exports.createProduct = async (req, res, next) => {
-    const {productName, price, description, category, quantity, productStatus, productImage, createdAt,     productStatus2="0"} = req.body
-    try {
-      await Product.create({
-        productName, 
-        price, 
-        description, 
-        category, 
-        quantity, 
-        productStatus, 
-        productStatus2,
-        productImage
-      }).then(product =>
-        res.status(200).json({
-          message: "Product successfully created",
-          product,
-        })
-      )
-    } catch (err) {
-      res.status(401).json({
-        message: "Product not successful created",
-        error: err.message,
+  const { productName, price, description, category, quantity, productStatus, productImage, createdAt, productStatus2 = "0" } = req.body
+  try {
+    await Product.create({
+      productName,
+      price,
+      description,
+      category,
+      quantity,
+      productStatus,
+      productStatus2,
+      productImage
+    }).then(product =>
+      res.status(200).json({
+        message: "Product successfully created",
+        product,
       })
-    }
+    )
+  } catch (err) {
+    res.status(401).json({
+      message: "Product not successful created",
+      error: err.message,
+    })
   }
-  
+}
+
 //find id of product to edit
 exports.editProduct = async (req, res, next) => {
   const {
@@ -99,49 +101,64 @@ exports.searchProduct = async (req, res) => {
   }
 };
 
-  //call all products
-  exports.getAllProducts = async (req, res) => {
-    try {
-      const products = await Product.find(); // Retrieve all products without any filters
-  
-      res.json(products); // Respond with all the products fetched
-    } catch (error) {
-      res.status(500).json({ message: 'An error occurred', error: error.message });
-    }
-  };
+//call all products
+exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find(); // Retrieve all products without any filters
 
-  //delete product
-  exports.deleteProduct = async (req, res, next) => {
-    const { _id } = req.body
-    await Product.findById(_id)
-      .then(product => product.deleteOne())
-      .then(product =>
-        res.status(201).json({ message: "Product successfully deleted", product })
-      )
-      .catch(error =>
-        res
-          .status(400)
-          .json({ message: "An error occurred", error: error.message })
-          )
+    res.json(products); // Respond with all the products fetched
+  } catch (error) {
+    res.status(500).json({ message: 'An error occurred', error: error.message });
   }
+};
 
-  //get product
-  exports.getProduct = async (req, res) => {
-    const productId = req.params.id; // Assuming the ID is passed in the request parameters
-  
-    try {
-      // Find a product by its _id
-      const product = await Product.findOne({ _id: productId });
-  
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-  
-      // Respond with the found product
-      res.status(200).json({ product });
-    } catch (error) {
-      res.status(500).json({ message: 'An error occurred', error: error.message });
+//delete product
+exports.deleteProduct = async (req, res, next) => {
+  const { _id } = req.body
+  await Product.findById(_id)
+    .then(product => product.deleteOne())
+    .then(product =>
+      res.status(201).json({ message: "Product successfully deleted", product })
+    )
+    .catch(error =>
+      res
+        .status(400)
+        .json({ message: "An error occurred", error: error.message })
+    )
+}
+
+//get product
+exports.getProduct = async (req, res) => {
+  const productId = req.params.id; // Assuming the ID is passed in the request parameters
+
+  try {
+    // Find a product by its _id
+    const product = await Product.findOne({ _id: productId });
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
-  };
-  
-  
+
+    // Respond with the found product
+    res.status(200).json({ product });
+  } catch (error) {
+    res.status(500).json({ message: 'An error occurred', error: error.message });
+  }
+};
+
+//get list of products based on id
+exports.getProducts = async (req, res) => {
+
+  try {
+    // Find a product by its _id
+    const ids = ['655bed52c1f0956dc6890e86', '658348ecb99d42a9e8e0e4ba'];
+    const obj_ids = ids.map(function(id) { return new mongoose.Types.ObjectId(id); });
+    const products = await Product.find({_id: {$in: obj_ids}});
+
+    // Respond with the found product
+    res.status(200).json({ products });
+  } catch (error) {
+    res.status(500).json({ message: 'An error occurred', error: error.message });
+  }
+};
+

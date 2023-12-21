@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json())
 app.use("/api/auth", require("./routes/route"))
 app.use("/api/items", require("./routes/productRoute"))
+app.use("/api/cart", require("./routes/userCartRoute"))
 app.use(cookieParser());
 
 //route for login

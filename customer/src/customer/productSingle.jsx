@@ -3,6 +3,9 @@ import bg_6 from './images/bg_6.jpg'
 import product_3 from './images/product_3.png'
 import Footer from './footer';
 import NavBar from './navigator'
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 export default function SingleProduct (){
     const backgroundImage = {
@@ -12,9 +15,34 @@ export default function SingleProduct (){
       const myStyle = {
         color: '#000'
       };
-      const myStyle2 = {
-        color: '#bbb'
-      };
+
+	  const [singleProduct, setSingleProduct] = useState({});
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+
+      const { id } = useParams(); // Access ID from the URL params
+
+      useEffect(() => {
+        axios.get(`http://localhost:5005/api/items/getProd/${id}`)
+          .then(response => {
+            setSingleProduct(response.data.product);
+            console.log(response.data)
+            setLoading(false);
+          })
+          .catch(error => {
+            console.error('Error fetching product:', error);
+            setError(error);
+            setLoading(false);
+          });
+      }, [id]);
+    
+      if (loading) {
+        return <p>Loading...</p>; // Show loading state while fetching data
+      }
+      
+      if (error || !singleProduct || Object.keys(singleProduct).length === 0) {
+        return <p>Error: Product not found</p>; // Show error message if API call fails or product not found
+      }
     return(
     <>
          <div className="goto-here">
@@ -40,27 +68,9 @@ export default function SingleProduct (){
     				<a href="images/product-1.png" className="image-popup prod-img-bg"><img src={product_3} className="img-fluid" alt="Colorlib Template" /></a>
     			</div>
     			<div className="col-lg-6 product-details pl-md-5 ftco-animate">
-    				<h3>{product_3.productName}</h3>
-    				<div className="rating d-flex">
-							<p className="text-left mr-4">
-								<a href="#" className="mr-2">5.0</a>
-								<a href="#"><span className="ion-ios-star-outline"></span></a>
-								<a href="#"><span className="ion-ios-star-outline"></span></a>
-								<a href="#"><span className="ion-ios-star-outline"></span></a>
-								<a href="#"><span className="ion-ios-star-outline"></span></a>
-								<a href="#"><span className="ion-ios-star-outline"></span></a>
-							</p>
-							<p className="text-left mr-4">
-								<a href="#" className="mr-2" style={myStyle}>100 <span style={myStyle2}>Rating</span></a>
-							</p>
-							<p className="text-left">
-								<a href="#" className="mr-2" style={myStyle}>500 <span style={myStyle2}>Sold</span></a>
-							</p>
-						</div>
-    				<p className="price"><span>$120.00</span></p>
-    				<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-    				<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.
-						</p>
+    				<h3>{singleProduct.productName}</h3>
+    				<p className="price"><span>P{singleProduct.price}</span></p>
+    				<p>{singleProduct.description}</p>
 						<div className="row mt-4">
 							<div className="col-md-6">
 								<div className="form-group d-flex">
