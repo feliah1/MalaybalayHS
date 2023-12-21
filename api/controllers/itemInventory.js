@@ -146,7 +146,7 @@ exports.getProduct = async (req, res) => {
   }
 };
 
-//get list of products based on id
+//get all products detail based on lists of product ids
 exports.getProducts = async (req, res) => {
 
   try {

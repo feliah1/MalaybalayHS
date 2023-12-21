@@ -9,8 +9,8 @@ const UserCartSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    userQuantity:{
-        type: String
+    productQuantity:{
+        type: Number
     }
 })
 
