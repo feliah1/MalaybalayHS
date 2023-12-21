@@ -1,8 +1,7 @@
 const UserCart = require("../models/userCart")
+const ItemInventoryController = require("./itemInventory")
 const mongoose = require('mongoose');
 
-//add to cart
-//remove product from cart
 //checkout
 //view all products from cart//
 //update product from cart {not important}
@@ -17,18 +16,19 @@ exports.getCartOfUser = async (req, res) => {
 
     const loggedInUserId = req.body.userId;
     
-
     try {
-
         const userCart = await UserCart.find({ userId: new mongoose.Types.ObjectId(loggedInUserId) });// Retrieve all products without any filters
-        res.json(userCart); // Respond with all the products fetched
+        const productIds = userCart.map(c => c.productId.toString());
+        const productDetails = ItemInventoryController.getProductsByIds("","");
+
+        res.json(productDetails); // Respond with all the products fetched
 
     } catch (error) {
         res.status(500).json({ message: 'An error occurred', error: error.message });
     }
 };
 
-//create product
+//add product to cart
 exports.AddToCart = async (req, res, next) => {
     const { userId, productId, productQuantity } = req.body
     try {

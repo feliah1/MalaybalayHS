@@ -147,7 +147,7 @@ exports.getProduct = async (req, res) => {
 };
 
 //get all products detail based on lists of product ids
-exports.getProducts = async (req, res) => {
+exports.getProductsByIds = async (req, res) => {
 
   try {
     // Find a product by its _id
