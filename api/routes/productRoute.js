@@ -5,7 +5,7 @@ const { createProduct, getProduct, editProduct, deleteProduct, getAllProducts, s
 router.route("/createProd").post(createProduct)
 router.route("/searchProd").get(searchProduct)
 router.route("/editProd").post(editProduct)
-router.route("/deleteProd").delete(deleteProduct)
+router.route("/deleteProd/:id").delete(deleteProduct)
 router.route("/getAllProd").get(getAllProducts)
 router.route("/getProd/:id").get(getProduct)
 

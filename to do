@@ -1,0 +1,19 @@
+===TO DO===
+>Admin = Create, Edit, Delete Product
+=Show, Delete, Accept/Decline Order
+=Create, Delete Cashier
+>Add design of createSingleItem Order List
+>Put it on Mongo Atlas
+>Test if Image upload is working
+>User = Can add cart, can buy to payment, (probably category)
+
+===TO DO=== Later
+>Identify Admin Employee and User through authentication
+>add the rest of the API
+>Userrrrrr
+>Cashier reroute
+>Button for Sales Record
+
+===TO DO=== Final
+>'/' routes in home
+>sign up on side

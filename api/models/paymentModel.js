@@ -11,13 +11,12 @@ const paymentSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now,
     },
     price: {
         type: Number,
     },
     payment:{
-        type:String
+        type: String
     }
   })
 

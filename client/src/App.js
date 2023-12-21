@@ -12,9 +12,9 @@ import OrderList from './pages/orderlist';
 import CashierAccount from './pages/cashieraccount';
 import Settings from './pages/settings';
 import About from './pages/about';
-import ItemSingle from './pages/itemsingle';
-import ItemSingleCreate from './pages/singleProductCreate';
-import ItemSingleEdit from './pages/singleProductEdit';
+import ItemSingle from './pages/itemsingle/itemsingle';
+import ItemSingleCreate from './pages/itemsingle/singleProductCreate';
+import ItemSingleEdit from './pages/itemsingle/singleProductEdit';
 
 // import ProtectedRoutes from "./protectedRoutes";
 

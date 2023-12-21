@@ -50,7 +50,7 @@ export default function Register() {
             <div>
             <div className="container-fluid position-relative">
               {/* Spinner Start */}
-                <div id="spinner" className="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+                <div id="spinner" className="bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
               </div>
               {/* Spinner End */}
           

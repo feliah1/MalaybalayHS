@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function ItemSingleEdit() {
+export default function ItemSingle(props) {
     const myStyle = {
         color: '#000'
       };
@@ -12,16 +13,18 @@ export default function ItemSingleEdit() {
       const [singleProduct, setSingleProduct] = useState({});
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState(null);
-    
-      const { id } = useParams();
-    
+
+      const { id } = useParams(); // Access ID from the URL params
+
       useEffect(() => {
-        axios.post(`http://localhost:5005/api/items/editProd`)
+        axios.get(`http://localhost:5005/api/items/getProd/${id}`)
           .then(response => {
-            setSingleProduct(response.data);
+            setSingleProduct(response.data.product);
+            console.log(response.data)
             setLoading(false);
           })
           .catch(error => {
+            console.error('Error fetching product:', error);
             setError(error);
             setLoading(false);
           });
@@ -30,11 +33,11 @@ export default function ItemSingleEdit() {
       if (loading) {
         return <p>Loading...</p>; // Show loading state while fetching data
       }
-    
-      if (error) {
-        return <p>Error: {error.message}</p>; // Show error message if API call fails
+      
+      if (error || !singleProduct || Object.keys(singleProduct).length === 0) {
+        return <p>Error: Product not found</p>; // Show error message if API call fails or product not found
       }
-    
+      
   return (
     <>
       <div>
@@ -98,23 +101,7 @@ export default function ItemSingleEdit() {
     		    </div>
     		    	<div className="col-lg-6 product-details pl-md-5 ftco-animate">
     				    <h3>{singleProduct.productName}</h3>
-    				<div className="rating d-flex">
-						<p className="text-left mr-4">
-							<a href="#" className="mr-2">5.0</a>
-							<a href="#"><span className="ion-ios-star-outline"></span></a>
-							<a href="#"><span className="ion-ios-star-outline"></span></a>
-							<a href="#"><span className="ion-ios-star-outline"></span></a>
-							<a href="#"><span className="ion-ios-star-outline"></span></a>
-							<a href="#"><span className="ion-ios-star-outline"></span></a>
-							</p>
-						<p className="text-left mr-4">
-							<a href="#" className="mr-2" style={myStyle}>100 <span style={myStyle2}>Rating</span></a>
-						</p>
-						<p className="text-left">
-							<a href="#" className="mr-2" style={myStyle}>500 <span style={myStyle2}>Sold</span></a>
-						</p>
-					</div>
-    			<p className="price"><span>{singleProduct.price}</span></p>
+    			<p className="price"><span>P{singleProduct.price}</span></p>
     			<p>{singleProduct.description}</p>
 					<div className="row mt-4">
 						<div className="col-md-6">
@@ -136,10 +123,18 @@ export default function ItemSingleEdit() {
 	          	</div>
 	          	<div className="w-100"></div>
 	          	<div className="col-md-12">
-	          		<p style={myStyle}>{singleProduct.quantity} piece available</p>
+	          		<p style={myStyle}> piece available {singleProduct.quantity}</p>
 	          	</div>
           	</div>
-          	<p><a href="" className="btn btn-black py-3 px-5 mr-2">Edit Product</a></p>
+          	<p>
+            <Link
+              to={{
+              pathname: `/itemsingleedit/${singleProduct._id}`,
+              state: { ProductId: singleProduct._id }
+              }}>
+              <a href="" className="btn btn-black py-3 px-5 mr-2">Edit Product</a>
+              </Link>
+              <a href="/delete" className="btn btn-primary py-3 px-5">Delete Product</a></p>
     			</div>
     		</div>
 

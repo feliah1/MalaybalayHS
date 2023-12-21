@@ -46,7 +46,8 @@ exports.register = async (req, res, next) => {
     if (!email || !password) {
       return res.status(400).json({
         message: "email or Password not present",
-      })
+        // https://accounts.google.com/InteractiveLogin/signinchooser?authuser=0&continue=https%3A%2F%2Fmeet.google.com%2Fwnr-gbmn-stt&followup=https%3A%2F%2Fmeet.google.com%2Fwnr-gbmn-stt&osid=1&passive=1209600&ifkv=ASKXGp2kFnuLACarpPe_rw3-DTtb761-a4O00MV2gVyhRYVYFBmvD1pbG0DA3GlLJkf7iKEGw0q-sw&theme=glif&flowName=GlifWebSignIn&flowEntry=ServiceLogin
+      });
     }
   }
 

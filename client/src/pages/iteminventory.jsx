@@ -11,7 +11,6 @@ export default function ItemInventory() {
 		.then(products => setProducts(products.data)) 
 		.catch(err => console.log(err))
 	}, [])
-
   return (
     <>
     <div>
@@ -77,8 +76,10 @@ export default function ItemInventory() {
 			<div className="container">
 				<div className="row">
 					<div className="col-md-8 col-lg-10 order-md-last">
-                    <Link to="/itemsinglecreate">
-                    <button style={{marginTop:"20px"}} className="btn btn-secondary btn-lg ml-auto mr-3 order-lg-las" href="/itemsinglecreate"> Create Product</button>
+                    <Link to={{ pathname: '/itemsinglecreate' }}>
+                        <button style={{ marginTop: "20px" }} className="btn btn-secondary btn-lg ml-auto mr-3 order-lg-last">
+                            Create Product
+                        </button>
                     </Link>
 						<div className="row">
 
@@ -91,8 +92,7 @@ export default function ItemInventory() {
                                     to={{
                                         pathname: `/itemsingle/${product._id}`,
                                         state: { ProductId: product._id }
-                                    }}
-                                    >
+                                    }}>
                                     <div className="img-prod">
                                         <img className="img-fluid" key={product.productImage} alt="Colorlib Template" />
                                         <div className="overlay"></div>
