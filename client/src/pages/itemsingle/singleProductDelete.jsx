@@ -8,7 +8,8 @@ export default function SingleProductDelete(product) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState()
 
-    const id = useParams();
+    const urlSplits = document.URL.split("/");
+    const id = urlSplits[urlSplits.length-1];
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,6 +20,7 @@ export default function SingleProductDelete(product) {
             .then((response) => {
                 setDeleteProd(false);
                 console.log('Product deleted:', response.data);
+                window.location.href = "/iteminventory";
                 // Additional actions after deleting the product if needed
             })
             .catch((error) => {
@@ -82,7 +84,7 @@ export default function SingleProductDelete(product) {
                         <div className="modal-content">
 							<div action="/itemsingledelete/<%= product._id %>" method="POST">
 								<div className="modal-header">						
-									<h4 className="modal-title">Delete Donation Data</h4>
+									<h4 className="modal-title">Delete Product</h4>
 								</div>
 								<div className="modal-body">					
 									<p>Are you sure you want to delete these Records?</p>

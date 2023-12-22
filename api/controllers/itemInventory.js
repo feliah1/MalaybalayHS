@@ -105,7 +105,7 @@ exports.searchProduct = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find(); // Retrieve all products without any filters
-
+    
     res.json(products); // Respond with all the products fetched
   } catch (error) {
     res.status(500).json({ message: 'An error occurred', error: error.message });
@@ -114,12 +114,12 @@ exports.getAllProducts = async (req, res) => {
 
 //delete product
 exports.deleteProduct = async (req, res, next) => {
-  const { _id } = req.body
-  await Product.findById(_id)
-    .then(product => product.deleteOne())
-    .then(product =>
-      res.status(201).json({ message: "Product successfully deleted", product })
-    )
+  const productId = req.params.id;
+  await Product.deleteOne({_id: new mongoose.Types.ObjectId(productId) })
+    .then(() => {
+      res.status(201).json({ message: "Product successfully deleted. Id: " + productId })
+
+    })
     .catch(error =>
       res
         .status(400)

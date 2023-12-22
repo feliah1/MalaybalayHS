@@ -41,6 +41,12 @@ export default function Login() {
         cookies.set("TOKEN", result.data.token, {
           path: "/",
         });
+        cookies.set("userId", result.data.userId, {
+          path: "/",
+        });
+        cookies.set("userType", result.data.userType, {
+          path: "/",
+        });
         // redirect user to the auth page
         window.location.href = "/auth";
       })

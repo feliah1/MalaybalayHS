@@ -10,7 +10,6 @@ exports.register = async (req, res, next) => {
     bcrypt.hash(password, 10).then(async (hash) => {
       await User.create({
         email,
-        //password: hash,
         password: password,
       })
         .then((user) => {
@@ -62,6 +61,10 @@ exports.register = async (req, res, next) => {
     }
     try {
       const user = await User.findOne({ email });
+      if(user == null)
+        return res.status(401).json({
+          message: "User not found",
+        })
       if(password === user.password.toString()) {
         const maxAge = 3 * 60 * 60;
           const token = jwt.sign(
