@@ -62,7 +62,7 @@ exports.register = async (req, res, next) => {
     }
     try {
       const user = await User.findOne({ email });
-      if(password === user.password) {
+      if(password === user.password.toString()) {
         const maxAge = 3 * 60 * 60;
           const token = jwt.sign(
             { id: user._id, email, role: user.role },
@@ -85,7 +85,7 @@ exports.register = async (req, res, next) => {
           });
           res.status(201).json({
             message: "User successfully Logged in",
-            user: user._id,
+            userId: user._id,
             userType: user.role
           })
         }
