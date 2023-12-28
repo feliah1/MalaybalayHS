@@ -1,5 +1,4 @@
 import React from "react";
-import logo from './img/logoimage.jpg';
 
 export default function Settings() {
   return (

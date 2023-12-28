@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import product_1 from "./img/product_1.png"
 
 export default function ItemInventory() {
 
@@ -111,7 +112,7 @@ export default function ItemInventory() {
                                                                 state: { ProductId: product._id }
                                                             }}>
                                                             <div className="img-prod">
-                                                                <img className="img-fluid" key={product.productImage} alt="Colorlib Template" />
+                                                                <img className="img-fluid" key={{product_1}} alt="Colorlib Template" />
                                                                 <div className="overlay"></div>
                                                             </div>
                                                             <div className="text py-3 pb-4 px-3">

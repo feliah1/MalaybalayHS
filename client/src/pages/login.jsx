@@ -2,18 +2,25 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import axios from "axios";
 import Cookies from "universal-cookie";
+import ReCAPTCHA from 'react-google-recaptcha'
+import GoogleLogin from 'react-google-login'
 
 // import Register from "./register";
 // import FreeComponent from "./freecomponent";
 // import AuthComponent from "./authcomponent";
 // import ProtectedRoutes from "../protectedRoutes";
 
+const clientId ='32733168142-au9rv84cln2khbigsgn1lrcll9p59ue8.apps.googleusercontent.com'
 const cookies = new Cookies();
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
+
+  var onloadCallback = function() {
+    alert("grecaptcha is ready!");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,6 +98,7 @@ export default function Login() {
                           />
                           <label htmlFor="floatingPassword">Password</label>
                         </div>
+                        <ReCAPTCHA sitekey="6LenTzkpAAAAACCvqaK1gMAA_H96hHWhDLTBaOmi" required/>
                         <button type="submit" className="btn btn-primary py-3 w-100 mb-4"
                           variant="primary"
                           onClick={(e) => handleSubmit(e)}
@@ -100,6 +108,12 @@ export default function Login() {
                             ) : (
                               <p className="text-danger"></p>
                             )}
+                            <GoogleLogin
+                              textButton='Login with Google'
+                              clientId={clientId}
+                              onClick={(e) => handleSubmit(e)}
+                              >
+                            </GoogleLogin>
                         <p className="text-center mb-0">Don't have an Account? <a href="/register">Register</a></p>
                 </div>
               </div>
@@ -107,19 +121,6 @@ export default function Login() {
           </div>
           {/* Sign Up End */}
         </div>
-        {/* JavaScript Libraries */}
-          <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-          <script src="lib/chart/chart.min.js"></script>
-          <script src="lib/easing/easing.min.js"></script>
-          <script src="lib/waypoints/waypoints.min.js"></script>
-          <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-          <script src="lib/tempusdominus/js/moment.min.js"></script>
-          <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-          <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-      {/* Template Javascript */}
-          <script src="js/main.js"></script>
       </div>
       </Form>
         </>
