@@ -24,8 +24,8 @@ export default function NavBar(){
                     <a className="dropdown-item" href="bags.html">Bags</a>
                   </div>
                   </li>
-                  <li className="nav-item"><a href="/about" className="nav-link">About</a></li>
                   <li className="nav-item"><a href="/cart" className="nav-link"><span className="icon-shopping_cart"></span>CART</a></li>
+                  <li className="nav-item"><a href="/about" className="nav-link">About</a></li>
                   <li className="nav-item"><a href="/setting" className="nav-link">Settings</a></li>
                 </ul>
     

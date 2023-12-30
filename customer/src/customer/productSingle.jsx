@@ -6,6 +6,7 @@ import NavBar from './navigator'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom';
 
 export default function SingleProduct (){
     const backgroundImage = {
@@ -16,11 +17,14 @@ export default function SingleProduct (){
         color: '#000'
       };
 
-	  const [singleProduct, setSingleProduct] = useState({});
+	    const [singleProduct, setSingleProduct] = useState({});
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState(null);
+      // const [redirectToCart, setRedirectToCart] = useState(true);
 
       const { id } = useParams(); // Access ID from the URL params
+
+
 
       useEffect(() => {
         axios.get(`http://localhost:5005/api/items/getProd/${id}`)
@@ -34,18 +38,40 @@ export default function SingleProduct (){
             setError(error);
             setLoading(false);
           });
-      }, [id]);
-    
-      if (loading) {
-        return <p>Loading...</p>; // Show loading state while fetching data
-      }
+        }, [id]);
       
-      if (error || !singleProduct || Object.keys(singleProduct).length === 0) {
-        return <p>Error: Product not found</p>; // Show error message if API call fails or product not found
+        if (loading) {
+          return <p>Loading...</p>; // Show loading state while fetching data
+        }
+        
+        if (error || !singleProduct || Object.keys(singleProduct).length === 0) {
+          return <p>Error: Product not found</p>; // Show error message if API call fails or product not found
+        }
+
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+      function onClick(){
+      
+        const dataForm = {
+          idUser: getCookie(`userId`),
+          productId: id,
+          productQuantity: document.getElementById("quantity").value
+        }
+
+        axios.post(`http://localhost:5005/api/cart/addcartforuser`,dataForm)
+          .then(res =>{
+            //onClick(res.data.dataForm)
+            console.log(res);
+            // setRedirectToCart(true);
+          }, [id])
+          console.log("click successful");
       }
-    return(
-    <>
-         <div className="goto-here">
+      return(
+      <>
+          <div className="goto-here">
 	<NavBar />
     {/* <!-- END nav --> */}
 
@@ -75,69 +101,23 @@ export default function SingleProduct (){
 							<div className="col-md-6">
 								<div className="form-group d-flex">
 		              <div className="select-wrap">
-	                  <div className="icon"><span className="ion-ios-arrow-down"></span></div>
-	                  <select name="" id="" className="form-control">
-	                  	<option value="">Small</option>
-	                    <option value="">Medium</option>
-	                    <option value="">Large</option>
-	                    <option value="">Extra Large</option>
-	                  </select>
 	                </div>
 		            </div>
 							</div>
 							<div className="w-100"></div>
 							<div className="input-group col-md-6 d-flex mb-3">
-	             	<span className="input-group-btn mr-2">
-	                	<button type="button" className="quantity-left-minus btn"  data-type="minus" data-field="">
-	                   <i className="ion-ios-remove"></i>
-	                	</button>
-	            		</span>
-	             	<input type="text" id="quantity" name="quantity" className="quantity form-control input-number" value="1" min="1" max="100" />
-	             	<span className="input-group-btn ml-2">
-	                	<button type="button" className="quantity-right-plus btn" data-type="plus" data-field="">
-	                     <i className="ion-ios-add"></i>
-	                 </button>
-	             	</span>
+	             	<input type="number" id="quantity" name="quantity" className="quantity form-control input-number" defaultValue={1} min="1" max="100" />
 	          	</div>
 	          	<div className="w-100"></div>
 	          	<div className="col-md-12">
-	          		<p style={myStyle}>80 piece available</p>
+	          		<p style={myStyle}>{singleProduct.quantity} pieces available</p>
 	          	</div>
           	</div>
-          	<p><a href="/cart" className="btn btn-black py-3 px-5 mr-2">Add to Cart</a><a href="/cart" className="btn btn-primary py-3 px-5">Buy now</a></p>
+            {/* {redirectToCart && <Navigate to="/cart" />} */}
+          	<p><a onClick={onClick} className="btn btn-black py-3 px-5 mr-2">Add to Cart</a><a onClick={onClick} className="btn btn-primary py-3 px-5">Buy now</a></p>
     			</div>
     		</div>
 
-
-
-
-    		<div className="row mt-5">
-          <div className="col-md-12 nav-link-wrap">
-            <div className="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a className="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
-
-            </div>
-          </div>
-          <div className="col-md-12 tab-wrap">
-            
-            <div className="tab-content bg-light" id="v-pills-tabContent">
-
-              <div className="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
-              	<div className="p-4">
-	              	<h3 className="mb-4">Nike Free RN 2019 iD</h3>
-	              	<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-              	</div>
-              </div>
-
-              <div className="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
-              	<div className="p-4">
-	              	<h3 className="mb-4">Manufactured By Nike</h3>
-	              	<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-              	</div>
-              </div>
-            </div>
-          </div>
-        </div>
     	</div>
     </section>
 	<Footer />
