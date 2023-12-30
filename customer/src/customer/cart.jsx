@@ -25,7 +25,7 @@ export default function Cart() {
 				setGetCart(cartproducts.data.userCartProducts);
 			})
 			.catch(err => console.log(err))
-	}, [])
+	}, [userId])
 
 
 	const userCartProducts = cartproducts;

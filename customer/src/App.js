@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Routes, Route } from 'react-router-dom';
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import "./App.css";
 
 import Home from './customer/home';

@@ -3,14 +3,6 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form'
 import axios from "axios";
 
-// import Login from "./login";
-// import FreeComponent from "./freecomponent";
-// import AuthComponent from "./authcomponent";
-// import ProtectedRoutes from "../protectedRoutes";
-
-// import { Routes, Route } from 'react-router-dom';
-// import { Container, Col, Row } from "react-bootstrap";
-
 export default function Register() {
   
   const [email, setEmail] = useState("");

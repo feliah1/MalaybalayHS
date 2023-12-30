@@ -7,15 +7,7 @@ import NavBar from './navigator'
 export default function Setting(){
   const backgroundImage = {
     backgroundImage: `url(${bg_6})`,
-  };
-  // const [users, setUsers] = useState([]);
-
-  // useEffect(() =>{
-  //   axios.get('http://localhost:5005/api/auth')
-  //   .then(products => setProducts(products.data)) 
-  //   .catch(err => console.log(err))
-  // }, [])
-        
+  };  
   return(
     <>
          <div className="goto-here">

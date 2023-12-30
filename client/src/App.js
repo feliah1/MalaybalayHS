@@ -9,7 +9,6 @@ import FreeComponent from "./pages/freecomponent";
 import AuthComponent from "./pages/authcomponent";
 import ItemInventory from './pages/iteminventory';
 import OrderList from './pages/orderlist';
-import CashierAccount from './pages/cashieraccount';
 import Settings from './pages/settings';
 import About from './pages/about';
 
@@ -37,7 +36,6 @@ function App() {
           <Route path="/itemsingleedit/:id" element={<ItemSingleEdit />}/>
           <Route path="/itemsingledelete/:id" element={<ItemSingleDelete />}/>
           <Route  path="/orderlist" element={<OrderList/>}/>
-          <Route path="/cashieraccount" element={<CashierAccount/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/settings" element={<Settings/>}/>
         </Routes>

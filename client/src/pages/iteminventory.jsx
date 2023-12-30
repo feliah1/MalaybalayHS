@@ -54,7 +54,6 @@ export default function ItemInventory() {
 
                             <a href="/iteminventory" className="nav-item nav-link active"><i className="fa fa-chart-line me-2"></i><span style={{ color: "#000000" }}>Item Inventory</span></a>
                             <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{ color: "#ffffff" }}>Order List</span></a>
-                            <a href="/cashieraccount" className="nav-item nav-link"><i className="fa fa-user-edit me-2"></i><span style={{ color: "#ffffff" }}>Cashier Account</span></a>
                             <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{ color: "#ffffff" }}>Settings</span></a>
                             <a href="/about" className="nav-item nav-link"><i className="fa fa-th me-2"></i> <span style={{ color: "#ffffff" }}>About</span></a>
                         </div>

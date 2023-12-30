@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 export default function ItemSingleEdit() {
 
@@ -45,6 +46,7 @@ export default function ItemSingleEdit() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+  const [redirectToInventory, setRedirectToInventory] = useState(false);
   const { id } = useParams();
 
   const handleSubmit = (e) => {
@@ -56,6 +58,7 @@ export default function ItemSingleEdit() {
       .then((response) => {
         setLoading(false);
         setSuccessMessage('Product created successfully.');
+        setRedirectToInventory(true); // Set the state to redirect upon successful update
         const itemData = response.data.formData;
         console.log('Product edited:', response.data);
         setFormData({
@@ -103,7 +106,6 @@ export default function ItemSingleEdit() {
 
               <a href="/iteminventory" className="nav-item nav-link active"><i className="fa fa-chart-line me-2"></i><span style={{ color: "#000000" }}>Item Inventory</span></a>
               <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{ color: "#ffffff" }}>Order List</span></a>
-              <a href="/cashieraccount" className="nav-item nav-link"><i className="fa fa-user-edit me-2"></i><span style={{ color: "#ffffff" }}>Cashier Account</span></a>
               <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{ color: "#ffffff" }}>Settings</span></a>
               <a href="/about" className="nav-item nav-link"><i className="fa fa-th me-2"></i> <span style={{ color: "#ffffff" }}>About</span></a>
             </div>
@@ -134,21 +136,15 @@ export default function ItemSingleEdit() {
             <section className="ftco-section">
               {/* <!-- Navbar Start --> */}
               <nav class="navbar navbar-expand bg-primary navbar-dark sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                  <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                  <i class="fa fa-bars"></i>
-                </a>
 
                 {/* <!-- Your form goes here --> */}
                 <div class="modal-body">
                   {/*body of edited model*/}
                   <form id="add-product-form" onSubmit={handleSubmit}>
                     <div class="mb-3">
-                      <label for="_id" class="form-label">Product Id:</label>
+                      <label for="_id" class="form-label" style={{visibility: 'hidden'}}>Product Id:</label>
                       <input type="text" class="form-control"
-                        id="_id" name="_id" disabled
+                        id="_id" name="_id" disabled style={{visibility: 'hidden'}}
                         value={formData._id} onChange={handleChange}
                         required></input>
                     </div>
@@ -212,6 +208,7 @@ export default function ItemSingleEdit() {
                     </div>
                     {error && <p className="error-message">{error}</p>}
                     {successMessage && <p className="success-message">{successMessage}</p>}
+                    {redirectToInventory && <Navigate to="/iteminventory" />}
                     <button type="submit" class="btn btn-primary" disabled={loading}>Finished Editing</button>
                   </form>
                 </div>

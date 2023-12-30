@@ -2,13 +2,10 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import axios from "axios";
 import Cookies from "universal-cookie";
-// import reCAPTCHA from "react-google-recaptcha"
+import ReCAPTCHA from "react-google-recaptcha"
+import GoogleLogin from 'react-google-login'
 
-// import Register from "./register";
-// import FreeComponent from "./freecomponent";
-// import AuthComponent from "./authcomponent";
-// import ProtectedRoutes from "../protectedRoutes";
-
+const clientId ='32733168142-tu10ev6b93h4h7m3nauk7cbl2rnbvin8.apps.googleusercontent.com'
 const cookies = new Cookies();
 
 export default function Login() {
@@ -92,6 +89,7 @@ export default function Login() {
                           />
                           <label htmlFor="floatingPassword">Password</label>
                         </div>
+                        <ReCAPTCHA sitekey="6LenTzkpAAAAACCvqaK1gMAA_H96hHWhDLTBaOmi" required/>
                         <button type="submit" className="btn btn-primary py-3 w-100 mb-4"
                           variant="primary"
                           onClick={(e) => handleSubmit(e)}
@@ -102,6 +100,14 @@ export default function Login() {
                             ) : (
                               <p className="text-danger"></p>
                             )}
+
+                            <GoogleLogin
+                              textButton='Login with Google'
+                              clientId={clientId}
+                              onClick={(e) => handleSubmit(e)}
+                              >
+                            </GoogleLogin>
+
                         <p className="text-center mb-0">Don't have an Account? <a href="/register">Register</a></p>
                 </div>
               </div>

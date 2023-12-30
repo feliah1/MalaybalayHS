@@ -63,7 +63,6 @@ export default function ItemSingle(props) {
 
                         <a href="/iteminventory" className="nav-item nav-link active"><i className="fa fa-chart-line me-2"></i><span style={{color: "#000000"}}>Item Inventory</span></a>
                         <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{color: "#ffffff"}}>Order List</span></a>
-                        <a href="/cashieraccount" className="nav-item nav-link"><i className="fa fa-user-edit me-2"></i><span style={{color: "#ffffff"}}>Cashier Account</span></a>
                         <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{color: "#ffffff"}}>Settings</span></a>
                         <a href="/about" className="nav-item nav-link"><i className="fa fa-th me-2"></i> <span style={{color: "#ffffff"}}>About</span></a>
                     </div>
@@ -148,21 +147,10 @@ export default function ItemSingle(props) {
 
     		<div className="row mt-5">
           <div className="col-md-12 nav-link-wrap">
-            <div className="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a className="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
-
-            </div>
           </div>
           <div className="col-md-12 tab-wrap">
             
             <div className="tab-content bg-light" id="v-pills-tabContent">
-
-              <div className="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
-              	<div className="p-4">
-	              	<h3 className="mb-4">{singleProduct.productName}</h3>
-	              	<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-              	</div>
-              </div>
 
               <div className="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
               	<div className="p-4">

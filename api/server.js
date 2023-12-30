@@ -16,7 +16,6 @@ app.use(cookieParser());
 //route for login
 app.get("/admin", adminAuth, (req, res) => res.send("/auth"));
 app.get("/basic", userAuth, (req, res) => res.send("/home"));
-app.get("/cashier", adminAuth, (req, res) => res.send("/cashier"));
 
 
 const server = app.listen(PORT, () =>

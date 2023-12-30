@@ -70,7 +70,6 @@ export default function ItemSingleCreate() {
 
                         <a href="/iteminventory" className="nav-item nav-link active"><i className="fa fa-chart-line me-2"></i><span style={{color: "#000000"}}>Item Inventory</span></a>
                         <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{color: "#ffffff"}}>Order List</span></a>
-                        <a href="/cashieraccount" className="nav-item nav-link"><i className="fa fa-user-edit me-2"></i><span style={{color: "#ffffff"}}>Cashier Account</span></a>
                         <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{color: "#ffffff"}}>Settings</span></a>
                         <a href="/about" className="nav-item nav-link"><i className="fa fa-th me-2"></i> <span style={{color: "#ffffff"}}>About</span></a>
                     </div>
@@ -101,12 +100,6 @@ export default function ItemSingleCreate() {
         <section className="ftco-section">
         {/* <!-- Navbar Start --> */}
             <nav className="navbar navbar-expand bg-primary navbar-dark sticky-top px-4 py-0">
-                <a href="index.html" className="navbar-brand d-flex d-lg-none me-4">
-                    <h2 className="text-primary mb-0"><i className="fa fa-user-edit"></i></h2>
-                </a>
-                <a href="#" className="sidebar-toggler flex-shrink-0">
-                    <i className="fa fa-bars"></i>
-                </a>
             
                 {/* <!-- Your form goes here --> */}
                 <div className="modal-body">

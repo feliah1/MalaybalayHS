@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 //create product
 exports.createProduct = async (req, res, next) => {
-  const { productName, price, description, category, quantity, productStatus, productImage, createdAt, productStatus2 = "0" } = req.body
+  const { productName, price, description, category, quantity, productStatus, productImage, createdAt = "0" } = req.body
   try {
     await Product.create({
       productName,
@@ -13,7 +13,6 @@ exports.createProduct = async (req, res, next) => {
       category,
       quantity,
       productStatus,
-      productStatus2,
       productImage
     }).then(product =>
       res.status(200).json({

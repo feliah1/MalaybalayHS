@@ -3,14 +3,9 @@ import Form from 'react-bootstrap/Form'
 import axios from "axios";
 import Cookies from "universal-cookie";
 import ReCAPTCHA from 'react-google-recaptcha'
-import GoogleLogin from 'react-google-login'
+// import GoogleLogin from 'react-google-login'
 
-// import Register from "./register";
-// import FreeComponent from "./freecomponent";
-// import AuthComponent from "./authcomponent";
-// import ProtectedRoutes from "../protectedRoutes";
-
-const clientId ='32733168142-au9rv84cln2khbigsgn1lrcll9p59ue8.apps.googleusercontent.com'
+// const clientId ='32733168142-tu10ev6b93h4h7m3nauk7cbl2rnbvin8.apps.googleusercontent.com'
 const cookies = new Cookies();
 
 export default function Login() {
@@ -86,7 +81,7 @@ export default function Login() {
                             type="email"
                             name="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}/>
+                            onChange={(e) => setEmail(e.target.value)} required/>
                           <label htmlFor="floatingInput">Email address</label>
                         </div>
                         <div className="form-floating mb-4">
@@ -95,6 +90,7 @@ export default function Login() {
                             name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
                           />
                           <label htmlFor="floatingPassword">Password</label>
                         </div>
@@ -108,13 +104,13 @@ export default function Login() {
                             ) : (
                               <p className="text-danger"></p>
                             )}
-                            <GoogleLogin
+                            {/* <GoogleLogin
                               textButton='Login with Google'
                               clientId={clientId}
                               onClick={(e) => handleSubmit(e)}
                               >
-                            </GoogleLogin>
-                        <p className="text-center mb-0">Don't have an Account? <a href="/register">Register</a></p>
+                            </GoogleLogin> */}
+                        <p className="text-center mb-0">Don't have an Account? <a href="/register" style={{color: 'black'}}>Register</a></p>
                 </div>
               </div>
             </div>

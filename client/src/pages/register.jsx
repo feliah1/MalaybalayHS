@@ -84,7 +84,7 @@ export default function Register() {
                             <p className="text-danger"></p>
                           )}
 
-                        <p className="text-center mb-0">Already have an Account? <a href="/">Login here</a></p>
+                        <p className="text-center mb-0">Already have an Account? <a href="/" style={{color: 'black'}}>Login here</a></p>
                 </div>
               </div>
             </div>
