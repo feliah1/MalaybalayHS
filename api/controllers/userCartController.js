@@ -3,8 +3,7 @@ const Product = require("../models/productModel")
 const mongoose = require('mongoose');
 
 //checkout
-//view all products from cart//
-//update product from cart {not important}
+//delete product from cart
 
 //get all products chose by user in the cart
 exports.getCartOfUser = async (req, res) => {
@@ -73,17 +72,21 @@ exports.AddToCart = async (req, res, next) => {
 
 //delete product from cart
 exports.DeleteCart = async (req, res) => {
+    const { userId } = req.body;
 
-    const id = new mongoose.Types.ObjectId(req.body.id);
+    await UserCart.deleteOne({userId: new mongoose.Types.ObjectId(userId) })
+    .then(() => {
+      res.status(201).json({ message: "Cart is successfully deleted. Id: " + userId })
 
-    await UserCart.findById(id)
-        .then(userCart => userCart.deleteOne())
-        .then(userCart =>
-            res.status(201).json({ message: "Product successfully deleted", userCart })
-        )
-        .catch(error =>
-            res
-                .status(400)
-                .json({ message: "An error occurred", error: error.message })
-        )
+    })
+    .catch(error =>
+      res
+        .status(400)
+        .json({ message: "An error occurred", error: error.message })
+    )
+}
+
+//add to checkout
+exports.CheckOut = async (req,res) => {
+
 }

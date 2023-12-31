@@ -94,7 +94,6 @@ export default function Login() {
                           variant="primary"
                           onClick={(e) => handleSubmit(e)}
                         >Login</button>
-                        {/* <reCAPTCHA /> */}
                           {login ? (
                               <p className="text-success">You Are Logged In Successfully</p>
                             ) : (

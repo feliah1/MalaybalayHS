@@ -1,5 +1,8 @@
 const Order = require ('../models/orderModel')
 
+//accept order function missing
+//test if these functions are working
+
 exports.getOrder = async ( req, res, next ) => {
     try{
         const orders = await Order.find(); // Retrieve all products without any filters

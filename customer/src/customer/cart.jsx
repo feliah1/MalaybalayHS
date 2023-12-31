@@ -18,7 +18,9 @@ export default function Cart() {
 	const [cartproducts, setGetCart] = useState([]);
 
 	const userId = getCookie("userId");
-	const cartId = document.getElementById("id")
+	const cartId = document.getElementById("id");
+	
+	console.log(cartId)
 
 	useEffect(() => {
 		axios.get(`http://localhost:5005/api/cart/getcartofuser/${userId}`)
@@ -36,8 +38,17 @@ export default function Cart() {
 		backgroundImage: `url(${bg_6})`,
 	};
 
+	function ProductTotalPrice(){
+		var totalCartPrice = 0;
+        
+        userCartProducts.forEach(c => {
+            totalCartPrice = totalCartPrice + c.productTotalPrice;
+        });
+
+	}
 	function deleteCart(){
-		axios.delete(`http://localhost:5005/api/cart/deletecart`, cartId)
+		
+		axios.delete(`http://localhost:5005/api/cart/deletecart`)
 			.then(res =>{
 				console.log(res)
 				console.log(`product deleted successfully in cart`);
@@ -73,7 +84,6 @@ export default function Cart() {
 											<tr className="">
 												<th>&nbsp;</th>
 												<th>&nbsp;</th>
-												<th>&nbsp;</th>
 												<th>Product</th>
 												<th>Price</th>
 												<th>Quantity</th>
@@ -83,7 +93,7 @@ export default function Cart() {
 							{
 								userCartProducts.map(userCartProduct =>{
 									return <tr className="text-center">
-												<td className="product-remove"><a href="#"><span className="ion-ios-close" onClick={deleteCart}></span></a></td>
+												<td className="product-remove"><a href="#"><span className="ion-ios-close" onClick={() => deleteCart(userCartProduct.id)}></span></a></td>
 
 												<td className="image-prod"><div className="img" style={userCartProduct.productImage}></div></td>
 
@@ -117,7 +127,7 @@ export default function Cart() {
 									<h3>Cart Totals</h3>
 										<p className="d-flex total-price">
 											<span>Total</span>
-											<span>P{userCartProducts.productTotalPrice}</span>
+											<span>P{ProductTotalPrice()}</span>
 										</p>
 								</div>
 								<p className="text-center"><a href="/order" className="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
