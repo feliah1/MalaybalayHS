@@ -6,7 +6,10 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { adminAuth, userAuth } = require("./controllers/authController");
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  credentials: true,
+}));
 app.use(express.json())
 app.use("/api/auth", require("./routes/route"))
 app.use("/api/items", require("./routes/productRoute"))
@@ -53,6 +56,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   );
+  res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 

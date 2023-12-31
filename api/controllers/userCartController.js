@@ -72,7 +72,7 @@ exports.AddToCart = async (req, res, next) => {
 }
 
 //delete product from cart
-exports.DeleteCart = async (req, res, next) => {
+exports.DeleteCart = async (req, res) => {
 
     const id = new mongoose.Types.ObjectId(req.body.id);
 

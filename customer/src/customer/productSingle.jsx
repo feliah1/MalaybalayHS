@@ -6,7 +6,7 @@ import NavBar from './navigator'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 
 export default function SingleProduct (){
     const backgroundImage = {
@@ -53,18 +53,20 @@ export default function SingleProduct (){
           const parts = value.split(`; ${name}=`);
           if (parts.length === 2) return parts.pop().split(';').shift();
         }
+
       function onClick(){
+        const idUser = getCookie(`userId`)
       
         const dataForm = {
-          idUser: getCookie(`userId`),
+          userId: idUser,
           productId: id,
-          productQuantity: document.getElementById("quantity").value
+          productQuantity: document.getElementById("quantity").value,
         }
 
-        axios.post(`http://localhost:5005/api/cart/addcartforuser`,dataForm)
+        axios.post(`http://localhost:5005/api/cart/addcartforuser`, dataForm)
           .then(res =>{
-            //onClick(res.data.dataForm)
-            console.log(res);
+            console.log('Retrieved userId:', idUser); // Log userId after the request
+            console.log('Response:', res);
             // setRedirectToCart(true);
           }, [id])
           console.log("click successful");

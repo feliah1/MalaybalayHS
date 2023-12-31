@@ -18,6 +18,7 @@ export default function Cart() {
 	const [cartproducts, setGetCart] = useState([]);
 
 	const userId = getCookie("userId");
+	const cartId = document.getElementById("id")
 
 	useEffect(() => {
 		axios.get(`http://localhost:5005/api/cart/getcartofuser/${userId}`)
@@ -35,15 +36,14 @@ export default function Cart() {
 		backgroundImage: `url(${bg_6})`,
 	};
 
-	const product = {
-		productName: 'test value',
-		productImage: null,
-		price: 10,
-		category: 'car',
-		productStatus: 'available',
-		description: 'this is a car'
+	function deleteCart(){
+		axios.delete(`http://localhost:5005/api/cart/deletecart`, cartId)
+			.then(res =>{
+				console.log(res)
+				console.log(`product deleted successfully in cart`);
+			})
+			.catch(err => console.log(err))
 	}
-
 
 	return (
 		<>
@@ -56,7 +56,7 @@ export default function Cart() {
 					<div className="container">
 						<div className="row no-gutters slider-text align-items-center justify-content-center">
 							<div className="col-md-9 ftco-animate text-center">
-								<p className="breadcrumbs"><span className="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
+								<p className="breadcrumbs"><span className="mr-2"><a href="/home">Home</a></span> <span>Cart</span></p>
 								<h1 className="mb-0 bread">My Wishlist</h1>
 							</div>
 						</div>
@@ -73,6 +73,7 @@ export default function Cart() {
 											<tr className="">
 												<th>&nbsp;</th>
 												<th>&nbsp;</th>
+												<th>&nbsp;</th>
 												<th>Product</th>
 												<th>Price</th>
 												<th>Quantity</th>
@@ -82,7 +83,7 @@ export default function Cart() {
 							{
 								userCartProducts.map(userCartProduct =>{
 									return <tr className="text-center">
-												<td className="product-remove"><a href="#"><span className="ion-ios-close"></span></a></td>
+												<td className="product-remove"><a href="#"><span className="ion-ios-close" onClick={deleteCart}></span></a></td>
 
 												<td className="image-prod"><div className="img" style={userCartProduct.productImage}></div></td>
 
@@ -95,7 +96,7 @@ export default function Cart() {
 
 												<td className="quantity">
 													<div className="input-group mb-3">
-														<input type="text" name="quantity" className="quantity form-control input-number" defaultValue={userCartProduct.productQuantity} min="1" max="100" />
+														<input type="number" name="quantity" className="quantity form-control input-number" defaultValue={userCartProduct.productQuantity} min="1" max="100" />
 													</div>
 												</td>
 
