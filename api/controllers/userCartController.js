@@ -83,5 +83,5 @@ exports.DeleteCart = async (req, res) => {
 
 //add to checkout
 exports.CheckOut = async (req,res) => {
-
+    
 }

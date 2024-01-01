@@ -7,8 +7,12 @@ const mongoose = require('mongoose');
 
 //get order list of user
 exports.GetOrderOfUser = async ( req, res, next ) => {
-  const loggedInUserId = req.params.userId;
+  
+  const loggedInUserId = req.params.userId.toString();
 
+  if (!loggedInUserId) {
+    return res.status(400).json({ message: 'User ID is missing in the request parameters' });
+  }
   try {
       const orderData = await Order.find({ userId: new mongoose.Types.ObjectId(loggedInUserId) });
       const productIds = orderData.map(c => c.productId.toString());
@@ -17,8 +21,9 @@ exports.GetOrderOfUser = async ( req, res, next ) => {
       const obj_ids = productIds.map(function (id) { return new mongoose.Types.ObjectId(id); });
       const productsData = await Product.find({ _id: { $in: obj_ids } });
 
+      //sulod ani ibutang ang orderData
       var userOrderProducts = [];
-      userOrderProducts.forEach(c => {
+      orderData.forEach(c => {
 
           var product = productsData.filter(d => {
               return d._id.toString() === c.productId.toString();
@@ -28,9 +33,9 @@ exports.GetOrderOfUser = async ( req, res, next ) => {
               "productId": product[0]._id,
               "productName": product[0].productName,
               "productDesc": product[0].description,
-              "productQuantity": c.productQuantity,
+              "orderProductQuantity": c.orderProductQuantity,
               "productPrice": product[0].price,
-              "productTotalPrice": product[0].price * c.productQuantity,
+              "productTotalPrice": product[0].price * c.orderProductQuantity,
           });
       });
 
@@ -44,11 +49,12 @@ exports.GetOrderOfUser = async ( req, res, next ) => {
 
 //add order from user
 exports.AddOrder = async ( req, res, next ) => {
-  const { productId, userId, orderDate, orderStatus } = req.body
+  const { productId, userId, orderProductQuantity, orderDate, orderStatus } = req.body
   try {
       await Order.create({
           userId,
           productId,
+          orderProductQuantity,
           orderDate,
           orderStatus
       }).then(order =>

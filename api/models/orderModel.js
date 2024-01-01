@@ -9,6 +9,9 @@ const orderSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
+    orderProductQuantity:{
+        type: Number
+    },
     orderDate: {
         type: Date,
         default: Date.now,
