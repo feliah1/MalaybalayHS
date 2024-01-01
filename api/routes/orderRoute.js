@@ -5,7 +5,7 @@ const { GetOrderOfUser, DeleteOrder, AddOrder, UpdateOrder } = require("../contr
 router.route("/getorderfromuser/:userId").get(GetOrderOfUser)
 router.route("/addorder").post(AddOrder)
 router.route("/updateorder").post(UpdateOrder)
-router.route("/DeleteOrder").delete(DeleteOrder)
+router.route("/deleteorder").delete(DeleteOrder)
 
 
 module.exports = router;

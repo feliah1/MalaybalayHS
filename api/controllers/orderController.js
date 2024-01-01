@@ -73,7 +73,18 @@ exports.AddOrder = async ( req, res, next ) => {
 
 //delete order for admin
 exports.DeleteOrder = async ( req, res, next ) => {
+  const { userId } = req.body;
 
+  await Order.deleteOne({userId: new mongoose.Types.ObjectId(userId) })
+  .then(() => {
+    res.status(201).json({ message: "Order is successfully deleted. Id: " + userId })
+
+  })
+  .catch(error =>
+    res
+      .status(400)
+      .json({ message: "An error occurred", error: error.message })
+  )
 }
 
 //update order if it is declined or accepted
