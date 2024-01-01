@@ -2,8 +2,7 @@ const UserCart = require("../models/userCart")
 const Product = require("../models/productModel")
 const mongoose = require('mongoose');
 
-//checkout
-//delete product from cart
+//update
 
 //get all products chose by user in the cart
 exports.getCartOfUser = async (req, res) => {
@@ -79,9 +78,4 @@ exports.DeleteCart = async (req, res) => {
         .status(400)
         .json({ message: "An error occurred", error: error.message })
     )
-}
-
-//add to checkout
-exports.CheckOut = async (req,res) => {
-    
 }

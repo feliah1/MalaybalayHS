@@ -22,8 +22,6 @@ export default function ItemInventory() {
 
     const [products, setProducts] = useState([]);
 
-
-
     useEffect(() => {
         axios.get('http://localhost:5005/api/items/getAllProd')
             .then(products => setProducts(products.data))
