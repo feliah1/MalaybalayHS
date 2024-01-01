@@ -38,20 +38,32 @@ export default function Cart() {
 		backgroundImage: `url(${bg_6})`,
 	};
 
-	function ProductTotalPrice(){
+	function TotalCartPrice(){
 		var totalCartPrice = 0;
         
         userCartProducts.forEach(c => {
             totalCartPrice = totalCartPrice + c.productTotalPrice;
         });
-
+		return totalCartPrice;
 	}
+	console.log("Total Cart Price:", TotalCartPrice());
+
 	function deleteCart(){
+		const userId = getCookie(`userId`)
+		console.log(userId)
 		
-		axios.delete(`http://localhost:5005/api/cart/deletecart`)
+		axios.delete(`http://localhost:5005/api/cart/deletecart`, {
+			data: { userId: userId }})
 			.then(res =>{
 				console.log(res)
 				console.log(`product deleted successfully in cart`);
+
+				// After deletion, update the UI by fetching the updated cart data
+				axios.get(`http://localhost:5005/api/cart/getcartofuser/${userId}`)
+					.then(cartProducts => {
+					setGetCart(cartProducts.data.userCartProducts);
+				})
+				.catch(err => console.log(err));
 			})
 			.catch(err => console.log(err))
 	}
@@ -93,9 +105,9 @@ export default function Cart() {
 							{
 								userCartProducts.map(userCartProduct =>{
 									return <tr className="text-center">
-												<td className="product-remove"><a href="#"><span className="ion-ios-close" onClick={() => deleteCart(userCartProduct.id)}></span></a></td>
+												<td className="product-remove"><a href="#"><span className="ion-ios-close" onClick={deleteCart} id={userId}></span></a></td>
 
-												<td className="image-prod"><div className="img" style={userCartProduct.productImage}></div></td>
+												<td className="image-prod"><div className="img" img={userCartProduct.productImage}></div></td>
 
 												<td className="product-name">
 													<h3>{userCartProduct.productName}</h3>
@@ -127,7 +139,7 @@ export default function Cart() {
 									<h3>Cart Totals</h3>
 										<p className="d-flex total-price">
 											<span>Total</span>
-											<span>P{ProductTotalPrice()}</span>
+											<span>P{TotalCartPrice()}</span>
 										</p>
 								</div>
 								<p className="text-center"><a href="/order" className="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>

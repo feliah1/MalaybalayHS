@@ -81,7 +81,7 @@ export default function SingleProduct (){
       <div className="container">
         <div className="row no-gutters slider-text align-items-center justify-content-center">
           <div className="col-md-9 ftco-animate text-center">
-          	<p className="breadcrumbs"><span className="mr-2"><a href="index.html">Home</a></span> <span>Shop</span></p>
+          	<p className="breadcrumbs"><span className="mr-2"><a href="/home">Home</a></span> <span>Shop</span></p>
             <h1 className="mb-0 bread">Shop</h1>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function SingleProduct (){
 	          	</div>
           	</div>
             {/* {redirectToCart && <Navigate to="/cart" />} */}
-          	<p><a onClick={onClick} className="btn btn-black py-3 px-5 mr-2">Add to Cart</a><a onClick={onClick} className="btn btn-primary py-3 px-5">Buy now</a></p>
+          	<p><a onClick={onClick} className="btn btn-black py-3 px-5 mr-2">Add to Cart</a><a onClick='' className="btn btn-primary py-3 px-5">Buy now</a></p>
     			</div>
     		</div>
 
