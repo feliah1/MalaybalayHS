@@ -12,9 +12,10 @@ exports.GetOrder = async ( req, res, next ) => {
   try {
     // Retrieve all products without any filters
     const ordersData = await Order.find({});
+
     //retrieve all data existing in product and user
     const productIds = ordersData.map(c => c.productId.toString());
-    const userIds = ordersData.map(c => c.userId.toString());
+    const userIds = ordersData.map(x => x.userId.toString());
 
     // Find a product by its _id
     const obj_productIds = productIds.map(function (id) { return new mongoose.Types.ObjectId(id); });
@@ -35,16 +36,17 @@ exports.GetOrder = async ( req, res, next ) => {
           return x._id.toString() === c.userId.toString();
         });
 
-
         userOrders.push({
             "userOrderProductId": product[0]._id,
             "userOrderId": user[0]._id,
             "userOrderEmail": user[0].email,
             "productOrderName": product[0].productName,
-            "orderProductQuantity": ordersData.orderProductQuantity,
+            "orderProductQuantity": c.orderProductQuantity,
             "productOrderPrice": product[0].price,
             "OrderTotalPrice": product[0].price * c.orderProductQuantity,
+            "orderStatus": c.orderStatus
         });
+
     });
 
     // Respond with the found product
