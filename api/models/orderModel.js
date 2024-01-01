@@ -5,6 +5,10 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'product'
     },
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
     orderDate: {
         type: Date,
         default: Date.now,

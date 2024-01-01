@@ -8,6 +8,7 @@ export default function Setting(){
   const backgroundImage = {
     backgroundImage: `url(${bg_6})`,
   };  
+
   return(
     <>
          <div className="goto-here">
@@ -32,11 +33,8 @@ export default function Setting(){
                 <div className="col-md-6">
                   <h2 className="mb-4">Account Settings</h2>
                   <form action="#" className="bg-white p-5 contact-form">
+
                     {/* <!-- Add various settings options here --> */}
-                    <div className="form-group">
-                      <label htmlFor="username">Username</label>
-                      <input type="text" id="username" className="form-control" placeholder="Your Username" />
-                    </div>
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
                       <input type="email" id="email" className="form-control" placeholder="Your Email" />
@@ -51,7 +49,7 @@ export default function Setting(){
                       <input type="submit" value="Save Settings" className="btn btn-primary py-3 px-5" />
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Log Out" className="btn btn-primary py-4 px-5" />
+                        <input type="submit" value="Delete Account" className="btn btn-danger py-4 px-5"/>
                       </div>
                   </form>
                 </div>

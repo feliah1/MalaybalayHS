@@ -14,7 +14,7 @@ export default function NavBar(){
                 
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item active"><a href="/home" className="nav-link">Home</a></li>
-                  <li className="nav-item dropdown">
+                  {/* <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                   <div className="dropdown-menu" aria-labelledby="dropdown04">
                     <a className="dropdown-item" href="footwear.html">Footwear</a>
@@ -23,8 +23,9 @@ export default function NavBar(){
                     <a className="dropdown-item" href="others.html">Others</a>
                     <a className="dropdown-item" href="bags.html">Bags</a>
                   </div>
-                  </li>
+                  </li> */}
                   <li className="nav-item"><a href="/cart" className="nav-link"><span className="icon-shopping_cart"></span>CART</a></li>
+                  <li className="nav-item"><a href="/order" className="nav-link"><span className="icon-shopping_cart"></span>Checkout</a></li>
                   <li className="nav-item"><a href="/about" className="nav-link">About</a></li>
                   <li className="nav-item"><a href="/setting" className="nav-link">Settings</a></li>
                 </ul>

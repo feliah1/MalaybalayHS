@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { adminAuth, userAuth } = require("./controllers/authController");
 
+//middleware
 app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:3001'],
   credentials: true,
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use("/api/auth", require("./routes/route"))
 app.use("/api/items", require("./routes/productRoute"))
 app.use("/api/cart", require("./routes/userCartRoute"))
+app.use("/api/order", require("./routes/orderRoute"))
 app.use(cookieParser());
 
 //route for login

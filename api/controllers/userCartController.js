@@ -7,11 +7,6 @@ const mongoose = require('mongoose');
 
 //get all products chose by user in the cart
 exports.getCartOfUser = async (req, res) => {
-    //get product ids based on user id in userCart table => returns list of prodids
-    //get product details from the product id => returns prod details
-    //make function to display product details
-    //return joint details of productName, productQuantity, description, and price
-    //compute total through backend
 
     const loggedInUserId = req.params.userId.toString();
 

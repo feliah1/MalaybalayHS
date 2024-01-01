@@ -5,10 +5,6 @@ const SalesSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'order'
     },
-    paymentId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'payment'
-    },
     date: {
         type: Date,
         default: Date.now,
