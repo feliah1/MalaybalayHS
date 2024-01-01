@@ -1,9 +1,59 @@
 const Order = require ('../models/orderModel')
 const Product = require("../models/productModel")
+const User = require("../models/userModel")
 const mongoose = require('mongoose');
 
-//accept order function missing
-//test if these functions are working
+//accept and decline order function is missing
+//get order for admin
+
+//get order list of all user for admin
+exports.GetOrder = async ( req, res, next ) => {
+
+  try {
+    // Retrieve all products without any filters
+    const ordersData = await Order.find({});
+    //retrieve all data existing in product and user
+    const productIds = ordersData.map(c => c.productId.toString());
+    const userIds = ordersData.map(c => c.userId.toString());
+
+    // Find a product by its _id
+    const obj_productIds = productIds.map(function (id) { return new mongoose.Types.ObjectId(id); });
+    const productsData = await Product.find({ _id: { $in: obj_productIds } });
+
+    //find a user by its _id
+    const obj_userIds = userIds.map(function (id) { return new mongoose.Types.ObjectId(id); });
+    const usersData = await User.find({ _id: { $in: obj_userIds } });
+
+    var userOrders = [];
+    ordersData.forEach(c => {
+
+        var product = productsData.filter(d => {
+          return d._id.toString() === c.productId.toString();
+        });
+
+        var user = usersData.filter(x => {
+          return x._id.toString() === c.userId.toString();
+        });
+
+
+        userOrders.push({
+            "userOrderProductId": product[0]._id,
+            "userOrderId": user[0]._id,
+            "userOrderEmail": user[0].email,
+            "productOrderName": product[0].productName,
+            "orderProductQuantity": ordersData.orderProductQuantity,
+            "productOrderPrice": product[0].price,
+            "OrderTotalPrice": product[0].price * c.orderProductQuantity,
+        });
+    });
+
+    // Respond with the found product
+    res.status(200).json({ userOrders });
+  }
+  catch(error){
+    res.status(500).json({ message: 'An error occurred', error: error.message });
+  }
+}
 
 //get order list of user
 exports.GetOrderOfUser = async ( req, res, next ) => {
@@ -49,7 +99,9 @@ exports.GetOrderOfUser = async ( req, res, next ) => {
 
 //add order from user
 exports.AddOrder = async ( req, res, next ) => {
+
   const { productId, userId, orderProductQuantity, orderDate, orderStatus } = req.body
+
   try {
       await Order.create({
           userId,
