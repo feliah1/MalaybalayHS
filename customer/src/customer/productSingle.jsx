@@ -6,7 +6,7 @@ import NavBar from './navigator'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-// import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export default function SingleProduct (){
     const backgroundImage = {
@@ -20,11 +20,10 @@ export default function SingleProduct (){
 	    const [singleProduct, setSingleProduct] = useState({});
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState(null);
-      // const [redirectToCart, setRedirectToCart] = useState(true);
+      const [redirectToOrder, setRedirectToOrder] = useState(false);
+      const [redirectToCart, setRedirectToCart] = useState(false);
 
       const { id } = useParams(); // Access ID from the URL params
-
-
 
       useEffect(() => {
         axios.get(`http://localhost:5005/api/items/getProd/${id}`)
@@ -67,7 +66,26 @@ export default function SingleProduct (){
           .then(res =>{
             console.log('Retrieved userId:', idUser); // Log userId after the request
             console.log('Response:', res);
-            // setRedirectToCart(true);
+            setRedirectToCart(true)
+          }, [id])
+          console.log("click successful");
+      }
+
+      function orderProduct(){
+        const idUser = getCookie(`userId`)
+      
+        const dataForm = {
+          userId: idUser,
+          productId: id,
+          orderProductQuantity: document.getElementById("quantity").value,
+          orderStatus: "waiting"
+        }
+
+        axios.post(`http://localhost:5005/api/order/addorder`, dataForm)
+          .then(res =>{
+            console.log('Retrieved userId:', idUser); // Log userId after the request
+            console.log('Response:', res);
+            setRedirectToOrder(true); // Set the state to redirect upon successful creation
           }, [id])
           console.log("click successful");
       }
@@ -115,8 +133,10 @@ export default function SingleProduct (){
 	          		<p style={myStyle}>{singleProduct.quantity} pieces available</p>
 	          	</div>
           	</div>
-            {/* {redirectToCart && <Navigate to="/cart" />} */}
-          	<p><a onClick={onClick} className="btn btn-black py-3 px-5 mr-2">Add to Cart</a><a onClick='' className="btn btn-primary py-3 px-5">Buy now</a></p>
+            
+            {redirectToCart && <Navigate to="/cart" />}
+            {redirectToOrder && <Navigate to="/order" />}
+          	<p><a onClick={onClick} className="btn btn-black py-3 px-5 mr-2">Add to Cart</a><a onClick={orderProduct} className="btn btn-primary py-3 px-5">Buy now</a></p>
     			</div>
     		</div>
 

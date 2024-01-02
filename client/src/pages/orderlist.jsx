@@ -26,6 +26,9 @@ export default function OrderList() {
             .catch(err => console.log(err))
     }, [])
 
+    function UpdateOrder(){
+        axios.put('http://localhost:5005/api/order/updateorder')
+    }
     return (
         <>
             <div>
