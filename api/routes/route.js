@@ -6,8 +6,6 @@ const{ registerCashier } = require("../controllers/cashierAccount")
 router.route("/register").post(register)
 router.route("/login").post(login);
 router.route("/update").put(adminAuth, update)
-router.route("/deleteUser").delete(adminAuth, deleteUser)
-
-router.route("/createCashier").post(registerCashier)
+router.route("/deleteUser").delete(deleteUser)
 
 module.exports = router

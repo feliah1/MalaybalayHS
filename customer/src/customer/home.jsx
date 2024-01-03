@@ -18,11 +18,19 @@ export default function Home() {
 	};
 
 	const [products, setProducts] = useState([]);
+	const [activity, setActivity] = useState('');
 
 	useEffect(() => {
 		axios.get('http://localhost:5005/api/items/getAllProd')
 			.then(products => setProducts(products.data))
 			.catch(err => console.log(err))
+
+			    // Fetch activity initially and every 4 seconds
+				getRandomActivity();
+				const intervalId = setInterval(getRandomActivity, 4000);
+			
+				// Clean up interval on component unmount
+				return () => clearInterval(intervalId);
 	}, [])
 
 	async function getRandomActivity() {
@@ -31,10 +39,9 @@ export default function Home() {
 		var data = await response.json()
 
 		var { activity } = data;
-		document.querySelector(".paragraph").innerHTML = activity
+		setActivity(activity);
 	}
-	setInterval(getRandomActivity, 3000)
-
+	
 	return (
 		<>
 			<div>
@@ -93,14 +100,15 @@ export default function Home() {
 									<div className="row mt-5">
 									</div>
 								</div>
-
-								<div className="col-md-2 col-lg-1">
-									<center>
-										<h3>Let's Do an Activity</h3>
-										<h6 className='paragraph'></h6>
-									</center>
-								</div>
 							</div>
+							<div>
+							</div>
+						</div>
+						<div>
+							<center>
+								<h3>Let's Do an Activity</h3>
+								<h6 className='paragraph'>{activity}</h6>
+							</center>
 						</div>
 					</section>
 					<Footer />

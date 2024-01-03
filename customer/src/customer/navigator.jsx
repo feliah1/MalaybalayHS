@@ -32,7 +32,7 @@ export default function NavBar() {
 
             <ul className="nav-item dropdown">
 
-              <a className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><input type="search" placeholder="SEARCH" /></a>
+              <a className="nav-link dropdown-toggle" style={{color:"black"}}href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
               <div className="dropdown-menu" aria-labelledby="dropdown04">
                 <a className="dropdown-item" href="/">Logout</a>
               </div>

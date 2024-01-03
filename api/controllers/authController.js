@@ -149,7 +149,7 @@ exports.register = async (req, res, next) => {
   };
 
   //delete user
-  exports.deleteUser = async (req, res, next) => {
+  exports.deleteUser = async (req, res) => {
     const { id } = req.body
     await User.findById(id)
       .then(user => user.deleteOne())

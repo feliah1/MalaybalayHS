@@ -193,7 +193,7 @@ export default function ItemSingleEdit() {
                     <div class="mb-3">
                       <label for="productImage" class="form-label">Image:</label>
                       <input type="file" class="form-control"
-                        id="productImage" name="productImage"
+                        id="productImage" name="productImage" accept="image/*"
                         value={formData.productImage}
                         onChange={handleChange} required />
                     </div>

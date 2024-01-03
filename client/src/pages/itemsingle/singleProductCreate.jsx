@@ -151,7 +151,7 @@ export default function ItemSingleCreate() {
                         <div className="mb-3">
                           <label for="productImage" className="form-label">Image:</label>
                           <input type="file" className="form-control" 
-                          id="productImage" name="productImage" 
+                          id="productImage" name="productImage"  accept="image/*"
                           value={formData.productImage} 
                           onChange={handleChange} required/>
                         </div>

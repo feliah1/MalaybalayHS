@@ -8,6 +8,10 @@ import GoogleLogin from 'react-google-login'
 const clientId ='32733168142-tu10ev6b93h4h7m3nauk7cbl2rnbvin8.apps.googleusercontent.com'
 const cookies = new Cookies();
 
+// function autoLogin(){
+//   clientId
+// }
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,6 +58,8 @@ export default function Login() {
         setLogin(false); // Set login state to false on error
       });
   };
+
+  
   
     return (
         <>

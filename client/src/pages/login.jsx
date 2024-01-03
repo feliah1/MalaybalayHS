@@ -94,8 +94,9 @@ export default function Login() {
                           />
                           <label htmlFor="floatingPassword">Password</label>
                         </div>
-                        <ReCAPTCHA sitekey="6LenTzkpAAAAACCvqaK1gMAA_H96hHWhDLTBaOmi" required/>
+                        <ReCAPTCHA sitekey="6LenTzkpAAAAACCvqaK1gMAA_H96hHWhDLTBaOmi" required />
                         <button type="submit" className="btn btn-primary py-3 w-100 mb-4"
+                          id={onloadCallback}
                           variant="primary"
                           onClick={(e) => handleSubmit(e)}
                         >Login</button>
@@ -110,7 +111,7 @@ export default function Login() {
                               onClick={(e) => handleSubmit(e)}
                               >
                             </GoogleLogin> */}
-                        <p className="text-center mb-0">Don't have an Account? <a href="/register" style={{color: 'black'}}>Register</a></p>
+                        {/* <p className="text-center mb-0">Don't have an Account? <a href="/register" style={{color: 'black'}}>Register</a></p> */}
                 </div>
               </div>
             </div>
