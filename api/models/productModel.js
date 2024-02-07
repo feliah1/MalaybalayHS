@@ -23,8 +23,7 @@ const productSchema = new mongoose.Schema({
       type: String,
     },
     productImage:{
-      data: Buffer,
-      contentType: String
+      type: Buffer 
     },
     createdAt:{
       type: Date,

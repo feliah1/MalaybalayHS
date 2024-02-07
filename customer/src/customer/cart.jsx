@@ -79,7 +79,7 @@ export default function Cart() {
 						<div className="row no-gutters slider-text align-items-center justify-content-center">
 							<div className="col-md-9 ftco-animate text-center">
 								<p className="breadcrumbs"><span className="mr-2"><a href="/home">Home</a></span> <span>Cart</span></p>
-								<h1 className="mb-0 bread">My Wishlist</h1>
+								<h1 className="mb-0 bread">Order List</h1>
 							</div>
 						</div>
 					</div>
@@ -124,9 +124,6 @@ export default function Cart() {
 												<td className="total">P{userCartProduct.productTotalPrice}</td>
 											</tr>
 											{/* <!-- END TR--> */}
-
-
-										
 								})}
 									</table>
 								</div>
@@ -141,7 +138,7 @@ export default function Cart() {
 											<span>P{TotalCartPrice()}</span>
 										</p>
 								</div>
-								<p className="text-center"><a href="/order" className="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+								<p className="text-center"><a href="/order" className="btn btn-primary py-3 px-4">CONFIRM ALL ORDERS</a></p>
 							</div>
 						</div>
 					</div>

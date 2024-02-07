@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function OrderList() {
+    const [redirectToOrder, setRedirectToOrder] = useState(false);
+
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -26,9 +28,19 @@ export default function OrderList() {
             .catch(err => console.log(err))
     }, [])
 
-    function UpdateOrder(){
-        axios.put('http://localhost:5005/api/order/updateorder')
-    }
+    // function UpdateOrder(){ 
+             
+    //     const dataForm = {
+    //       orderStatus: statusOfOrder
+    //     }
+
+    //     axios.post(`http://localhost:5005/api/order/updateorder`, dataForm)
+    //       .then(res =>{
+    //         console.log('Response:', res);
+    //         setRedirectToOrder(true); // Set the state to redirect upon successful creation
+    //       }, [id])
+    //       console.log("click successful");
+    //   }
     return (
         <>
             <div>

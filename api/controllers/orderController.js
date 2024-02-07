@@ -143,5 +143,36 @@ exports.DeleteOrder = async ( req, res, next ) => {
 
 //update order if it is declined or accepted
 exports.UpdateOrder = async ( req, res, next ) => {
+  const {_id, orderStatus} = req.body;
   
+  // Check if the necessary fields (orderId) are present
+  if (!_id) {
+    return res.status(400).json({ message: "Order ID is missing" });
+  }
+
+  try {
+    // Find the order by ID
+    const order = await Order.findById(_id);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    // Update order field individually if they exist in the request body
+    if (orderStatus) order.orderStatus = orderStatus;
+
+    // Save the updated order
+    const updatedOrder = await order.save();
+
+    res.status(200).json({
+      message: 'Order updated successfully',
+      order: updatedOrder,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Error updating order',
+      error: err.message,
+    });
+  }
+
 }

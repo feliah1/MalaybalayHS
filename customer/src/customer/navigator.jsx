@@ -24,10 +24,10 @@ export default function NavBar() {
                     <a className="dropdown-item" href="bags.html">Bags</a>
                   </div>
                   </li> */}
-              <li className="nav-item"><a href="/cart" className="nav-link"><span className="icon-shopping_cart"></span>CART</a></li>
-              <li className="nav-item"><a href="/order" className="nav-link"><span className="icon-shopping_cart"></span>Checkout</a></li>
+              <li className="nav-item"><a href="/cart" className="nav-link"><span className="icon-shopping_cart"></span>ORDER LIST</a></li>
+              <li className="nav-item"><a href="/order" className="nav-link"><span className="icon-shopping_cart"></span>ORDERS</a></li>
               <li className="nav-item"><a href="/about" className="nav-link">About</a></li>
-              <li className="nav-item"><a href="/setting" className="nav-link">Settings</a></li>
+              {/* <li className="nav-item"><a href="/setting" className="nav-link">Settings</a></li> */}
             </ul>
 
             <ul className="nav-item dropdown">

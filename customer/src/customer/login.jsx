@@ -117,7 +117,7 @@ export default function Login() {
                               >
                             </GoogleLogin>
 
-                        <p className="text-center mb-0">Don't have an Account? <a href="/register">Register</a></p>
+                        {/* <p className="text-center mb-0">Don't have an Account? <a href="/register">Register</a></p> */}
                 </div>
               </div>
             </div>
