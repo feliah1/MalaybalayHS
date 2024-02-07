@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import placeholder from "../img/product_2.png"
 
 export default function ItemSingle(props) {
     const myStyle = {
@@ -63,7 +64,7 @@ export default function ItemSingle(props) {
 
                         <a href="/iteminventory" className="nav-item nav-link active"><i className="fa fa-chart-line me-2"></i><span style={{color: "#000000"}}>Item Inventory</span></a>
                         <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{color: "#ffffff"}}>Order List</span></a>
-                        <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{color: "#ffffff"}}>Settings</span></a>
+                        <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{color: "#ffffff"}}>Cashier Account</span></a>
                         <a href="/about" className="nav-item nav-link"><i className="fa fa-th me-2"></i> <span style={{color: "#ffffff"}}>About</span></a>
                     </div>
                 </nav>
@@ -96,7 +97,7 @@ export default function ItemSingle(props) {
     		<div className="row">
 
         <div className="col-lg-6 mb-5 ftco-animate">
-    		<a href="" className="image-popup prod-img-bg"><img src={singleProduct.productImage} className="img-fluid" alt="Colorlib Template" /></a>
+    		<a href="" className="image-popup prod-img-bg"><img src={placeholder} className="img-fluid" alt="Colorlib Template" /></a>
     		    </div>
     		    	<div className="col-lg-6 product-details pl-md-5 ftco-animate">
     				    <h3>{singleProduct.productName}</h3>
@@ -122,16 +123,20 @@ export default function ItemSingle(props) {
 	          	</div>
 	          	<div className="w-100"></div>
 	          	<div className="col-md-12">
-	          		<p style={myStyle}> piece available {singleProduct.quantity}</p>
+	          		<p style={myStyle}> Piece Available: {singleProduct.quantity}</p>
+	          	</div>
+              <div className="col-md-12">
+	          		<p style={myStyle}> Status: {singleProduct.productStatus}</p>
 	          	</div>
           	</div>
+            
           	<p>
             <Link
               to={{
               pathname: `/itemsingleedit/${singleProduct._id}`,
               state: { ProductId: singleProduct._id }
               }}>
-              <a href="" className="btn btn-black py-3 px-5 mr-2">Edit Product</a>
+              <a href="" className="btn btn-primary py-3 px-5">Edit Product</a>
               </Link>
 
               <Link
@@ -139,7 +144,7 @@ export default function ItemSingle(props) {
               pathname: `/itemsingledelete/${singleProduct._id}`,
               state: { ProductId: singleProduct._id }
               }}>
-              <a href="" className="btn btn-primary py-3 px-5">Delete Product</a>
+              <a href="" className="btn btn-black py-3 px-5 mr-2 ">Delete Product</a>
               </Link>
               </p>
     			</div>

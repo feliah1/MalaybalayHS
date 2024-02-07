@@ -38,7 +38,7 @@ exports.editProduct = async (req, res, next) => {
     category,
     quantity,
     productStatus,
-    image,
+    productImage,
     createdAt
   } = req.body;
 

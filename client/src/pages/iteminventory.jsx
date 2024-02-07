@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import product_1 from "./img/product_1.png"
+import placeholder from "./img/product_2.png"
 
 export default function ItemInventory() {
 
@@ -52,7 +52,7 @@ export default function ItemInventory() {
 
                             <a href="/iteminventory" className="nav-item nav-link active"><i className="fa fa-chart-line me-2"></i><span style={{ color: "#000000" }}>Item Inventory</span></a>
                             <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{ color: "#ffffff" }}>Order List</span></a>
-                            <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{ color: "#ffffff" }}>Settings</span></a>
+                            <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{ color: "#ffffff" }}>Cashier Account</span></a>
                             <a href="/about" className="nav-item nav-link"><i className="fa fa-th me-2"></i> <span style={{ color: "#ffffff" }}>About</span></a>
                         </div>
                     </nav>
@@ -109,8 +109,9 @@ export default function ItemInventory() {
                                                                 state: { ProductId: product._id }
                                                             }}>
                                                             <div className="img-prod">
-                                                                <img className="img-fluid" key={{product_1}} alt="Colorlib Template" />
-                                                                <div className="overlay"></div>
+															<a href="#" className="img-prod"><img className="img-fluid" src={placeholder} alt="Colorlib Template" />
+																<div className="overlay"></div>
+															</a>
                                                             </div>
                                                             <div className="text py-3 pb-4 px-3">
                                                                 <h3>{product.productName}</h3>

@@ -58,7 +58,7 @@ export default function Settings() {
                     <a href="/auth#" className="nav-item nav-link"><i className="fa fa-tachometer-alt me-2"></i><span style={{color:"#ffffff"}}>Dashboard</span></a>
                     <a href="/iteminventory" className="nav-item nav-link"><i className="fa fa-chart-line me-2"></i><span style={{color:"#ffffff"}}>Item Inventory</span></a>
                     <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{color:"#ffffff"}}>Order List</span></a>
-                    <a href="/settings" className="nav-item nav-link active"><i className="fa fa-chart-bar me-2"></i><span style={{color:"#000000"}}>Settings</span></a>
+                    <a href="/settings" className="nav-item nav-link active"><i className="fa fa-chart-bar me-2"></i><span style={{color:"#000000"}}>Cashier Account</span></a>
                     <a href="/about" className="nav-item nav-link"><i className="fa fa-th me-2"></i> <span style={{color:"#ffffff"}}>About</span></a>
                 </div>
                 </nav>
