@@ -31,7 +31,7 @@ export default function OrderList() {
     // function UpdateOrder(){ 
              
     //     const dataForm = {
-    //       orderStatus: statusOfOrder
+    //       orderStatus: orderStatus
     //     }
 
     //     axios.post(`http://localhost:5005/api/order/updateorder`, dataForm)

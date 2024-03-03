@@ -151,26 +151,22 @@ export default function Settings() {
 
                 {/* <!-- Blank Start --> */}
                 <div className="container-fluid pt-4 px-4">
-                    <div className="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                    <div className="row vh-100 bg-secondary rounded align-items justify-content mx-0">
                     <Form onSubmit={(e)=>handleSubmit(e)}>
                         <div>
                         <div className="container-fluid position-relative">
                         {/* Spinner Start */}
-                            <div id="spinner" className="bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+                            <div id="spinner" className="bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items justify-content">
                         </div>
                         {/* Spinner End */}
                     
                     {/* Sign Up Start */}
                     <div className="container-fluid">
-                        <div className="row h-100 align-items-center justify-content-center" style={{minHeight: '100vh'}}>
+                        <div className="row h-100 align-items justify-content" style={{minHeight: '100vh'}}>
                         <div className="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                             <div className="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
-                            <div className="d-flex align-items-center justify-content-between mb-3">
-                                <a href="/register">
-                                <h3 className="text-primary"><i className="fa fa-user-edit me-2" />Create Cashier Account</h3>
-                                </a><br /><br />
-                                </div>
-                                    <div><h3>Create here</h3></div>
+
+                                    <div><h3>Create Cashier here</h3></div>
                                     <div className="form-floating mb-3">
                                     <input className="form-control" id="floatingInput" placeholder="name@example.com" 
                                         type="email"
@@ -201,10 +197,15 @@ export default function Settings() {
                         </div>
                         </div>
                     </div>
+                    <h2>Cashier Accounts:</h2>
                     {/* Sign Up End */}
+                    
                     </div>
                 </div>
+
                 </Form>
+
+            
                     </div>
                 </div>
                 {/* <!-- Blank End --> */}

@@ -17,6 +17,8 @@ app.use("/api/items", require("./routes/productRoute"))
 app.use("/api/cart", require("./routes/userCartRoute"))
 app.use("/api/order", require("./routes/orderRoute"))
 app.use(cookieParser());
+const multer = require('multer');
+const storage = multer.memoryStorage();
 
 //route for login
 app.get("/admin", adminAuth, (req, res) => res.send("/auth"));

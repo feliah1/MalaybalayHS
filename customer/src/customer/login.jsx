@@ -96,13 +96,14 @@ export default function Login() {
                           <label htmlFor="floatingPassword">Password</label>
                         </div>
 
-                        <ReCAPTCHA sitekey="6LenTzkpAAAAACCvqaK1gMAA_H96hHWhDLTBaOmi" required/>
+                        {/* <ReCAPTCHA sitekey="6LenTzkpAAAAACCvqaK1gMAA_H96hHWhDLTBaOmi" required/> */}
                         
                         <button type="submit" className="btn btn-primary py-3 w-100 mb-4"
                           variant="primary"
                           onClick={(e) => handleSubmit(e)}
                         >Login</button>
 
+                        <p style={{color:'white', textAlign:'center'}}>Not the cashier?  <a href="http://localhost:3000">Go to Admin.</a></p>
 
                           {login ? (
                               <p className="text-success">You Are Logged In Successfully</p>
@@ -110,12 +111,12 @@ export default function Login() {
                               <p className="text-danger"></p>
                             )}
 
-                            <GoogleLogin
+                            {/* <GoogleLogin
                               textButton='Login with Google'
                               clientId={clientId}
                               onClick={(e) => handleSubmit(e)}
                               >
-                            </GoogleLogin>
+                            </GoogleLogin> */}
 
                         {/* <p className="text-center mb-0">Don't have an Account? <a href="/register">Register</a></p> */}
                 </div>
