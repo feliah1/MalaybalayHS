@@ -8,7 +8,10 @@ import Login from "./pages/login";
 import FreeComponent from "./pages/freecomponent";
 import AuthComponent from "./pages/authcomponent";
 import ItemInventory from './pages/iteminventory';
+
 import OrderList from './pages/orderlist';
+import OrderLog from './pages/orderlog';
+
 import Settings from './pages/settings';
 import About from './pages/about';
 
@@ -38,6 +41,7 @@ function App() {
           <Route  path="/orderlist" element={<OrderList/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/settings" element={<Settings/>}/>
+          <Route path="/orderlog" element={<OrderLog/>}/>
         </Routes>
       </Row>
     </Container>

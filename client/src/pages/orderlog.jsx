@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function OrderList() {
+export default function OrderLog() {
     const [redirectToOrder, setRedirectToOrder] = useState(false);
 
     function getCookie(name) {
@@ -139,13 +139,6 @@ export default function OrderList() {
 
 
                     {/* <!-- Blank Start --> */}
-                    <h5 style={{color:"white"}}>
-                        Check Order Logs: 
-                        <a  href="/orderlog"> 
-                            <button type="button" className="btn btn-primary btn-lg" style={{padding:"`40px"}} value="Order Logs"/> 
-                        </a>
-                    </h5>  
-
                     <div className="container-fluid pt-4 px-4">
                         <div className="row vh-100 bg-secondary rounded justify-content-center mx-0">
                             <section className="ftco-section">
@@ -156,41 +149,22 @@ export default function OrderList() {
                                                 <table className="table">
                                                     <thead className="thead-primary">
                                                         <tr className="">
-                                                            <th>Cashier</th>
                                                             <th>Product</th>
                                                             <th>Price</th>
-                                                            <th>Quantity</th>
                                                             <th>Total</th>
-                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                             {
                                                 orders.map(order =>{
                                                     return <tr className="text-center">
                                                         <td>
-                                                            <p>{order.userOrderEmail}</p>
+                                                            <p>Product Name</p>
                                                         </td>
                                                         <td className="product-name">
-                                                            <p>{order.productOrderName}</p>
+                                                            <p>price</p>
                                                         </td>
                                                         <td className="price">
-                                                            <p>{order.productOrderPrice}</p>
-                                                        </td>
-                                                        <td className="quantity">
-                                                            <p>{order.orderProductQuantity}</p>
-                                                        </td>
-                                                        <td className="total">
-                                                            <p>{order.OrderTotalPrice}</p>
-                                                        </td>
-                                                        <td>
-                                                        <form id="form1"><input type="hidden" name="id" value={order.orderStatus} />
-                                                        <select name="status" id="lang">
-                                                            <option value="waiting">waiting</option>
-                                                            <option value="accepted">accepted</option>
-                                                            <option value="rejected">rejected</option>
-                                                        </select>
-                                                            <input form="form1" type="submit" value="Save" />
-                                                            </form>
+                                                            <p>total</p>
                                                         </td>
                                                     </tr>
                                                     {/* <!-- END TR--> */}

@@ -103,12 +103,12 @@ export default function Login() {
                       onClick={(e) => handleSubmit(e)}
                     >Login</button>
 
-                    <p style={{color:'white', textAlign:'center'}}>Not the admin?  <a href="http://localhost:3001">Go to Cashier.</a></p>
+                    <p style={{ textAlign:'center' }}>Not the admin?  <a href="http://localhost:3001">Go to Cashier.</a></p>
 
                     {login ? (
                       <p className="text-success">You Are Logged In Successfully</p>
                     ) : (
-                      <p className="text-danger">Unsuccessfully logged in</p>
+                      <p className="text-danger"></p>
                     )}
 
                     {/* <GoogleLogin

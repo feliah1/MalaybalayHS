@@ -6,6 +6,8 @@ export default function Settings() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [register, setRegister] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
   
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -23,6 +25,8 @@ export default function Settings() {
         }),
       };
   
+
+
       // make the API call
       axios(configuration)
         .then((res) => {
@@ -34,6 +38,22 @@ export default function Settings() {
           setRegister(false); // Set register state to false on error
         });
     }
+
+    // function deleteUser(){
+    //     axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
+    //     .then((response) => {
+    //         setDeleteProd(false);
+    //         console.log('Product deleted:', response.data);
+    //         window.location.href = "/iteminventory";
+    //         // Additional actions after deleting the product if needed
+    //     })
+    //     .catch((error) => {
+    //         setLoading(false);
+    //         setError('Error deleting product. Please try again.');
+    //         console.error('Error deleting product:', error);
+    //         // Handle specific error details
+    //     });
+    // }
   return (
     <>
      <div>
@@ -193,11 +213,58 @@ export default function Settings() {
                                     ) : (
                                         <p className="text-danger"></p>
                                     )}
+
+                                                                
+                                <div>
+                                    <h5>Sales Report PDF:
+                                        <a  href=""> 
+                                            <button type="button" className="btn btn-primary btn-lg" style={{padding:"`40px"}} value="Order Logs"/> 
+                                        </a>
+                                    </h5>
+                                </div>
+
+                                <div>
+                                    <h5>Cashier Archive:
+                                        <a  href=""> 
+                                            <button type="button" className="btn btn-primary btn-lg" style={{padding:"`40px"}} value="Order Logs"/> 
+                                        </a>
+                                    </h5>
+                                </div>
+                                
+                            <h3>Cashier Accounts:</h3>
                             </div>
+
+
+                            <table className="table">
+                                                    <thead className="thead-primary">
+                                                        <tr className="">
+                                                            <th>Cashier</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                            {/* {
+                                                orders.map(order =>{ */}
+                                                    <tr className="text-center">
+                                                        <td action="/itemsingledelete/<%= user._id %>" method="POST">
+                                                            <p>cashier name</p>
+                                                        </td>
+                                                        <td>
+                                                        <form id="form1"><input type="hidden" name="id" value=''/>
+                                                            <input form="form1" type="submit" value="Delete Account" />
+                                                            <input form="form1" type="submit" value="Edit Account" />
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                    {/* <!-- END TR--> */}
+
+
+
+                                                {/* // })
+                                                //      } */}
+                                                </table>
                         </div>
                         </div>
                     </div>
-                    <h2>Cashier Accounts:</h2>
                     {/* Sign Up End */}
                     
                     </div>
