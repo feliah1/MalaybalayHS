@@ -12,13 +12,15 @@ import ItemInventory from './pages/iteminventory';
 import OrderList from './pages/orderlist';
 import OrderLog from './pages/orderlog';
 
-import Settings from './pages/settings';
 import About from './pages/about';
 
 import ItemSingle from './pages/itemsingle/itemsingle';
 import ItemSingleCreate from './pages/itemsingle/singleProductCreate';
 import ItemSingleEdit from './pages/itemsingle/singleProductEdit';
 import ItemSingleDelete from './pages/itemsingle/singleProductDelete'
+
+import Settings from './pages/users/settings';
+import CashierDelete from './pages/users/cashierDelete';
 
 // import ProtectedRoutes from "./protectedRoutes";
 
@@ -41,6 +43,7 @@ function App() {
           <Route  path="/orderlist" element={<OrderList/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/settings" element={<Settings/>}/>
+          <Route path="/deletecashier" element={<CashierDelete/>}/>
           <Route path="/orderlog" element={<OrderLog/>}/>
         </Routes>
       </Row>

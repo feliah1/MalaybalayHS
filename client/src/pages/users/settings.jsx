@@ -46,23 +46,23 @@ export default function Settings() {
         });
     }
 
-    // function deleteUser(id) {
-    //     // Send a DELETE request to delete the user account
-    //     axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
-    //         .then((response) => {
-    //             setDeleteUser(false); // Reset deleteProd state
-    //             console.log('Product deleted:', response.data);
-    //             window.location.href = "/iteminventory";
-    //             // Additional actions after deleting the product if needed
-    //         })
-    //         .catch((error) => {
-    //             // Handle errors
-    //             setLoading(false); // Reset loading state
-    //             setError('Error deleting account. Please try again.'); // Set error message
-    //             console.error('Error deleting account:', error);
-    //             // Handle specific error details
-    //         });
-    // }
+    function userDelete(id) {
+        // Send a DELETE request to delete the user account
+        axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
+            .then((response) => {
+                setDeleteUser(false); // Reset deleteProd state
+                console.log('Product deleted:', response.data);
+                window.location.href = "/iteminventory";
+                // Additional actions after deleting the product if needed
+            })
+            .catch((error) => {
+                // Handle errors
+                setLoading(false); // Reset loading state
+                setError('Error deleting account. Please try again.'); // Set error message
+                console.error('Error deleting account:', error);
+                // Handle specific error details
+            });
+    }
 
     useEffect(() => {
         axios.get('http://localhost:5005/api/auth/getallusers')
@@ -243,11 +243,31 @@ export default function Settings() {
                                         </a>
                                     </h5>
                                 </div>
-                                
-                            <h3>Cashier Accounts:</h3>
                             </div>
                             
-                            <table className="table">
+                        </div>
+                        </div>
+                    </div>
+                    {/* Sign Up End */}
+                    
+                    </div>
+                </div>
+
+                </Form>
+
+            
+                    </div>
+                </div>
+                
+                <div className="container-fluid pt-4 px-4">
+                        <div className="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                            <div className=" text-center">
+                                <h3>Cashier Accounts:</h3>
+                            </div>
+                                <div className="row">
+
+                                    <div className="">
+                                    <table className="table">
                                                     <thead className="thead-primary">
                                                         <tr className="">
                                                             <th>Cashier</th>
@@ -271,19 +291,10 @@ export default function Settings() {
                                             }
                                                     {/* <!-- END TR--> */}
                                                 </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
-                    {/* Sign Up End */}
-                    
-                    </div>
-                </div>
-
-                </Form>
-
-            
-                    </div>
-                </div>
                 {/* <!-- Blank End --> */}
 
 

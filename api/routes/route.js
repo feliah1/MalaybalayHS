@@ -7,6 +7,6 @@ router.route("/register").post(register)
 router.route("/login").post(login);
 router.route("/update").put(adminAuth, update)
 router.route("/getallusers").get(getAllUsers)
-router.route("/deleteUser").delete(deleteUser)
+router.route("/deleteUser/:id").delete(deleteUser)
 
 module.exports = router

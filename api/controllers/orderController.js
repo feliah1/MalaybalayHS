@@ -7,55 +7,47 @@ const mongoose = require('mongoose');
 //get order for admin
 
 //get order list of all user for admin
-exports.GetOrder = async ( req, res, next ) => {
-
+exports.GetOrder = async (req, res, next) => {
   try {
-    // Retrieve all products without any filters
     const ordersData = await Order.find({});
-
-    //retrieve all data existing in product and user
     const productIds = ordersData.map(c => c.productId.toString());
     const userIds = ordersData.map(x => x.userId.toString());
 
-    // Find a product by its _id
-    const obj_productIds = productIds.map(function (id) { return new mongoose.Types.ObjectId(id); });
+    const obj_productIds = productIds.map(id => new mongoose.Types.ObjectId(id));
     const productsData = await Product.find({ _id: { $in: obj_productIds } });
 
-    //find a user by its _id
-    const obj_userIds = userIds.map(function (id) { return new mongoose.Types.ObjectId(id); });
+    const obj_userIds = userIds.map(id => new mongoose.Types.ObjectId(id));
     const usersData = await User.find({ _id: { $in: obj_userIds } });
 
     var userOrders = [];
     ordersData.forEach(c => {
+      const product = productsData.find(d => d._id.toString() === c.productId.toString());
+      const user = usersData.find(x => x._id.toString() === c.userId.toString());
 
-        var product = productsData.filter(d => {
-          return d._id.toString() === c.productId.toString();
-        });
-
-        var user = usersData.filter(x => {
-          return x._id.toString() === c.userId.toString();
-        });
-
+      if (product && user) {
         userOrders.push({
-            "userOrderProductId": product[0]._id,
-            "userOrderId": user[0]._id,
-            "userOrderEmail": user[0].email,
-            "productOrderName": product[0].productName,
-            "orderProductQuantity": c.orderProductQuantity,
-            "productOrderPrice": product[0].price,
-            "OrderTotalPrice": product[0].price * c.orderProductQuantity,
-            "orderStatus": c.orderStatus
+          userOrderProductId: product._id,
+          userOrderId: user._id,
+          userOrderEmail: user.email,
+          productOrderName: product.productName,
+          orderProductQuantity: c.orderProductQuantity,
+          productOrderPrice: product.price,
+          OrderTotalPrice: product.price * c.orderProductQuantity,
+          orderStatus: c.orderStatus
         });
-
+      } else {
+        // Handle case where product or user is not found
+        console.error('Product or user not found for order:', c);
+      }
     });
 
-    // Respond with the found product
     res.status(200).json({ userOrders });
-  }
-  catch(error){
+  } catch (error) {
+    console.error('Error fetching orders:', error);
     res.status(500).json({ message: 'An error occurred', error: error.message });
   }
-}
+};
+
 
 //get order list of user
 exports.GetOrderOfUser = async ( req, res, next ) => {

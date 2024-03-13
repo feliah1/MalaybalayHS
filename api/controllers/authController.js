@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const jwtSecret = '7b7e03a9c80a1471c1191483bc9b418ed653af0dbe2789483b1e1de70d449258c47e21'
 const User = require("../models/userModel")
 const bcrypt = require("bcryptjs")
+const mongoose = require('mongoose');
 
 //create user
 exports.register = async (req, res, next) => {
@@ -149,18 +150,18 @@ exports.register = async (req, res, next) => {
   };
 
   //delete user
-  exports.deleteUser = async (req, res) => {
-    const { id } = req.body
-    await User.findById(id)
-      .then(user => user.deleteOne())
-      .then(user =>
-        res.status(201).json({ message: "User successfully deleted", user })
-      )
+  exports.deleteUser = async (req, res, next) => {
+    const userId = req.params.id;
+    await User.deleteOne({_id: new mongoose.Types.ObjectId(userId) })
+      .then(() => {
+        res.status(201).json({ message: "User successfully deleted. Id: " + userId })
+  
+      })
       .catch(error =>
         res
           .status(400)
           .json({ message: "An error occurred", error: error.message })
-          )
+      )
   }
 
   //admin authentication
@@ -211,7 +212,7 @@ exports.register = async (req, res, next) => {
     try {
       const users = await User.find(); // Retrieve all users without any filters
       
-      res.json(users); // Respond with all the products fetched
+      res.json(users); // Respond with all the users fetched
     } catch (error) {
       res.status(500).json({ message: 'An error occurred', error: error.message });
     }
