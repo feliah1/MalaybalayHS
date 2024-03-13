@@ -9,13 +9,18 @@ export default function Settings() {
     const [register, setRegister] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [deleteUser, setDeleteUser] = useState(null);
     const [users, setUsers] = useState(null);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+    
+        // Check if email or password is empty
+        if (!email.trim() || !password.trim()) {
+            setError("Username and password are required.");
+            return;
+        }
+    
         const configuration = {
             method: "POST",
             url: "http://localhost:5005/api/auth/register",
@@ -28,13 +33,7 @@ export default function Settings() {
                 password
             }),
         };
-
-        // Check if email or password is empty
-        if (!email.trim() || !password.trim()) {
-            setError("Email and password are required.");
-            return;
-        }
-
+    
         // make the API call
         axios(configuration)
             .then((res) => {
@@ -45,25 +44,8 @@ export default function Settings() {
                 console.error('Registration failed:', err);
                 setRegister(false); // Set register state to false on error
             });
-    }
+    };
 
-    function userDelete(id) {
-        // Send a DELETE request to delete the user account
-        axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
-            .then((response) => {
-                setDeleteUser(false); // Reset deleteProd state
-                console.log('Product deleted:', response.data);
-                window.location.href = "/iteminventory";
-                // Additional actions after deleting the product if needed
-            })
-            .catch((error) => {
-                // Handle errors
-                setLoading(false); // Reset loading state
-                setError('Error deleting account. Please try again.'); // Set error message
-                console.error('Error deleting account:', error);
-                // Handle specific error details
-            });
-    }
 
     useEffect(() => {
         axios.get('http://localhost:5005/api/auth/getallusers')
@@ -222,6 +204,7 @@ export default function Settings() {
                                                             variant="primary"
                                                             onClick={(e) => handleSubmit(e)}
                                                         >Create Account</button>
+                                                        {error && <p className="text-danger">{error}</p>}
                                                         {register ? (
                                                             <p className="text-success">Cashier Account added Successfully!</p>
                                                         ) : (
