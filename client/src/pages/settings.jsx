@@ -8,8 +8,10 @@ export default function Settings() {
     const [register, setRegister] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [deleteProd, setDeleteProd] = useState(null);
+    const [deleteUser, setDeleteUser] = useState(null);
+    const [users, setUsers] = useState(null);
   
+    
     const handleSubmit = (e) => {
       e.preventDefault();
   
@@ -25,9 +27,13 @@ export default function Settings() {
           password
         }),
       };
-  
 
-
+        // Check if email or password is empty
+        if (!email.trim() || !password.trim()) {
+            setError("Email and password are required.");
+            return;
+        }
+        
       // make the API call
       axios(configuration)
         .then((res) => {
@@ -40,23 +46,31 @@ export default function Settings() {
         });
     }
 
-    function deleteUser(id) {
-        // Send a DELETE request to delete the user account
-        axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
-            .then((response) => {
-                setDeleteProd(false); // Reset deleteProd state
-                console.log('Product deleted:', response.data);
-                window.location.href = "/iteminventory";
-                // Additional actions after deleting the product if needed
-            })
-            .catch((error) => {
-                // Handle errors
-                setLoading(false); // Reset loading state
-                setError('Error deleting account. Please try again.'); // Set error message
-                console.error('Error deleting account:', error);
-                // Handle specific error details
-            });
-    }
+    // function deleteUser(id) {
+    //     // Send a DELETE request to delete the user account
+    //     axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
+    //         .then((response) => {
+    //             setDeleteUser(false); // Reset deleteProd state
+    //             console.log('Product deleted:', response.data);
+    //             window.location.href = "/iteminventory";
+    //             // Additional actions after deleting the product if needed
+    //         })
+    //         .catch((error) => {
+    //             // Handle errors
+    //             setLoading(false); // Reset loading state
+    //             setError('Error deleting account. Please try again.'); // Set error message
+    //             console.error('Error deleting account:', error);
+    //             // Handle specific error details
+    //         });
+    // }
+
+    useEffect(() => {
+        axios.get('http://localhost:5005/api/auth/getallusers')
+            .then(users => setUsers(users.data)) // Change users to viewUser
+            .catch(err => console.log(err))
+    }, [])
+
+
   return (
     <>
      <div>
@@ -178,10 +192,6 @@ export default function Settings() {
                     <Form onSubmit={(e)=>handleSubmit(e)}>
                         <div>
                         <div className="container-fluid position-relative">
-                        {/* Spinner Start */}
-                            <div id="spinner" className="bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items justify-content">
-                        </div>
-                        {/* Spinner End */}
                     
                     {/* Sign Up Start */}
                     <div className="container-fluid">
@@ -236,8 +246,7 @@ export default function Settings() {
                                 
                             <h3>Cashier Accounts:</h3>
                             </div>
-
-
+                            
                             <table className="table">
                                                     <thead className="thead-primary">
                                                         <tr className="">
@@ -245,11 +254,11 @@ export default function Settings() {
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
-                                            {/* {
-                                                orders.map(order =>{ */}
+                                            {
+                                                users && users.map(user => (
                                                     <tr className="text-center">
-                                                        <td action="/itemsingledelete/<%= user._id %>" method="POST">
-                                                            <p>cashier name</p>
+                                                        <td action="/deleteUser/<%= user._id %>" method="POST">
+                                                            <p>{user.email}</p>
                                                         </td>
                                                         <td>
                                                         <form id="form1"><input type="hidden" name="id" value=''/>
@@ -258,12 +267,9 @@ export default function Settings() {
                                                             </form>
                                                         </td>
                                                     </tr>
+                                                ))
+                                            }
                                                     {/* <!-- END TR--> */}
-
-
-
-                                                {/* // })
-                                                //      } */}
                                                 </table>
                         </div>
                         </div>
