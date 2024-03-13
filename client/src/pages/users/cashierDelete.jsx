@@ -21,12 +21,12 @@ export default function CashierDelete(user) {
                 setDeleteUser(false);
                 console.log('User deleted:', response.data);
                 window.location.href = "/settings";
-                // Additional actions after deleting the product if needed
+                // Additional actions after deleting the user if needed
             })
             .catch((error) => {
                 setLoading(false);
-                setError('Error deleting product. Please try again.');
-                console.error('Error deleting product:', error);
+                setError('Error deleting user. Please try again.');
+                console.error('Error deleting user:', error);
                 // Handle specific error details
             });
     };
@@ -81,9 +81,9 @@ export default function CashierDelete(user) {
                     <div className="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
 
                         <div className="modal-content">
-							<div action="/itemsingledelete/<%= product._id %>" method="POST">
+							<div action="/itemsingledelete/<%= user._id %>" method="POST">
 								<div className="modal-header">						
-									<h4 className="modal-title">Delete Product</h4>
+									<h4 className="modal-title">Delete User</h4>
 								</div>
 								<div className="modal-body">					
 									<p>Are you sure you want to delete these Records?</p>

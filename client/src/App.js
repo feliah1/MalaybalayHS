@@ -43,7 +43,7 @@ function App() {
           <Route  path="/orderlist" element={<OrderList/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/settings" element={<Settings/>}/>
-          <Route path="/deletecashier" element={<CashierDelete/>}/>
+          <Route path="/deletecashier/:id" element={<CashierDelete/>}/>
           <Route path="/orderlog" element={<OrderLog/>}/>
         </Routes>
       </Row>
