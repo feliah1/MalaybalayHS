@@ -8,6 +8,7 @@ export default function Settings() {
     const [register, setRegister] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [deleteProd, setDeleteProd] = useState(null);
   
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -39,21 +40,23 @@ export default function Settings() {
         });
     }
 
-    // function deleteUser(){
-    //     axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
-    //     .then((response) => {
-    //         setDeleteProd(false);
-    //         console.log('Product deleted:', response.data);
-    //         window.location.href = "/iteminventory";
-    //         // Additional actions after deleting the product if needed
-    //     })
-    //     .catch((error) => {
-    //         setLoading(false);
-    //         setError('Error deleting product. Please try again.');
-    //         console.error('Error deleting product:', error);
-    //         // Handle specific error details
-    //     });
-    // }
+    function deleteUser(id) {
+        // Send a DELETE request to delete the user account
+        axios.delete(`http://localhost:5005/api/user/deleteUser/${id}`)
+            .then((response) => {
+                setDeleteProd(false); // Reset deleteProd state
+                console.log('Product deleted:', response.data);
+                window.location.href = "/iteminventory";
+                // Additional actions after deleting the product if needed
+            })
+            .catch((error) => {
+                // Handle errors
+                setLoading(false); // Reset loading state
+                setError('Error deleting account. Please try again.'); // Set error message
+                console.error('Error deleting account:', error);
+                // Handle specific error details
+            });
+    }
   return (
     <>
      <div>

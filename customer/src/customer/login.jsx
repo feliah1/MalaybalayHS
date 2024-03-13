@@ -77,14 +77,16 @@ export default function Login() {
                     </a><br /><br />
                   </div>
                   <div><h3>Login</h3></div>
+                  
                   <div className="form-floating mb-3">
-                    <input className="form-control" id="floatingInput" placeholder="name@example.com"
-                      type="email"
+                    <input className="form-control" id="floatingInput" placeholder="name"
+                      type="name"
                       name="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)} required />
                     <label htmlFor="floatingInput">Email address</label>
                   </div>
+
                   <div className="form-floating mb-4">
                     <input className="form-control" id="floatingPassword" placeholder="Password"
                       type="password"

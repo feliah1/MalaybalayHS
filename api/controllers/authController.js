@@ -205,3 +205,14 @@ exports.register = async (req, res, next) => {
         .json({ message: "Not authorized, token not available" })
     }
   }
+
+  //get all cashier and admin users
+  exports.getAllUsers = async (req, res) => {
+    try {
+      const users = await User.find(); // Retrieve all users without any filters
+      
+      res.json(users); // Respond with all the products fetched
+    } catch (error) {
+      res.status(500).json({ message: 'An error occurred', error: error.message });
+    }
+  };
