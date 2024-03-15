@@ -24,7 +24,6 @@ export default function ItemSingleEdit() {
           category: response.data.product.category,
           quantity: response.data.product.quantity,
           productStatus: response.data.product.productStatus,
-          productImage: response.data.product.productImage,
           createdAt: response.data.product.createdAt
         });
         console.log(response.data)

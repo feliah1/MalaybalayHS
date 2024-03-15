@@ -62,7 +62,10 @@ exports.editProduct = async (req, res, next) => {
     if (category) product.category = category;
     if (quantity) product.quantity = quantity;
     if (productStatus) product.productStatus = productStatus;
-    if (image) product.image = image;
+    if (productImage !== undefined) {
+      product.productImage = productImage;
+    }
+``
     if (createdAt) product.createdAt = createdAt;
 
     // Save the updated product
