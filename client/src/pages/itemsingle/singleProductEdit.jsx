@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
@@ -9,9 +9,8 @@ export default function ItemSingleEdit() {
   const prodid = urlSplits[urlSplits.length - 1];
 
   const [formData, setFormData] = useState({});
-
-
-  
+  const[showConfirmation, setShowConfirmation] = useState(false);
+  const confirmationRef = useRef(null); 
 
   useEffect(() => {
     axios.get(`http://localhost:5005/api/items/getProd/${prodid}`)
@@ -80,6 +79,17 @@ export default function ItemSingleEdit() {
       });
   };
 
+  const handleCancelEditing = () => {
+    setShowConfirmation(false);
+  };
+
+  const handleFinishEditing = (e) => {
+    e.preventDefault();
+    setShowConfirmation(true);
+    // Scroll to the confirmation modal when displayed
+    confirmationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <>
       <div>
@@ -139,7 +149,7 @@ export default function ItemSingleEdit() {
                 {/* <!-- Your form goes here --> */}
                 <div class="modal-body">
                   {/*body of edited model*/}
-                  <form id="add-product-form" onSubmit={handleSubmit}>
+                  <form id="add-product-form" onSubmit={handleFinishEditing}>
                     <div class="mb-3">
                       <label for="_id" class="form-label" style={{visibility: 'hidden'}}>Product Id:</label>
                       <input type="text" class="form-control"
@@ -210,6 +220,25 @@ export default function ItemSingleEdit() {
                     {redirectToInventory && <Navigate to="/iteminventory" />}
                     <button type="submit" class="btn btn-primary" disabled={loading}>Finished Editing</button>
                   </form>
+
+                      {/* Confirmation Modal */}
+                      {showConfirmation && (
+                        <div className={modalOverlay} ref={confirmationRef}>
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h4 className="modal-title">Confirmation</h4>
+                              </div>
+                              <div className="modal-body">
+                                <p>Are you sure you are done editing?</p>
+                              </div>
+                              <div className="modal-footer">
+                                <button className="btn btn-default" onClick={handleCancelEditing}>Cancel</button>
+                                <button className="btn btn-danger" onClick={handleSubmit}>Confirm</button>
+                              </div>
+                            </div>
+                        </div>
+                      )}
+
                 </div>
                 {/* <!-- Your form ends here --> */}
 
@@ -248,4 +277,16 @@ export default function ItemSingleEdit() {
       </div>
     </>
   )
+};
+
+const modalOverlay = {
+  padding: '8px 16px',
+  marginRight: '10px',
+  border: 'none',
+  borderRadius: '3px',
+  cursor: 'pointer',
+  backgroundColor: '#007bff',
+  color: '#fff',
+  fontWeight: 'bold',
+  outline: 'none',
 };

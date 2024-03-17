@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Settings() {
+
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [register, setRegister] = useState(false);
@@ -12,7 +14,7 @@ export default function Settings() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         // Check if email or password is empty
         if (!email.trim() || !password.trim()) {
             setError("Username and password are required.");
@@ -36,6 +38,10 @@ export default function Settings() {
         axios(configuration)
             .then((res) => {
                 setRegister(true);
+                // After successful registration, fetch the updated list of users
+                axios.get('http://localhost:5005/api/auth/getallusers')
+                    .then(users => setUsers(users.data))
+                    .catch(err => console.log(err));
             })
             .catch((err) => {
                 // Handle the error if needed
@@ -48,7 +54,6 @@ export default function Settings() {
                 setRegister(false); // Set register state to false on error
             });
     };
-
     useEffect(() => {
         axios.get('http://localhost:5005/api/auth/getallusers')
             .then(users => setUsers(users.data)) // Change users to viewUser
