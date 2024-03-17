@@ -229,7 +229,7 @@ export default function ItemSingleEdit() {
                                 <h4 className="modal-title">Confirmation</h4>
                               </div>
                               <div className="modal-body">
-                                <p>Are you sure you are done editing?</p>
+                                <p>Are you sure this is done editing?</p>
                               </div>
                               <div className="modal-footer">
                                 <button className="btn btn-default" onClick={handleCancelEditing}>Cancel</button>
