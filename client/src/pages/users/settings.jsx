@@ -7,10 +7,8 @@ export default function Settings() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [register, setRegister] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [users, setUsers] = useState(null);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,10 +40,14 @@ export default function Settings() {
             .catch((err) => {
                 // Handle the error if needed
                 console.error('Registration failed:', err);
+                if (err.response && err.response.status === 400 && err.response.data.message === "Email address already exists") {
+                    setError("Username already exists");
+                } else {
+                    setError("Failed to create cashier account"); // Generic error message
+                }
                 setRegister(false); // Set register state to false on error
             });
     };
-
 
     useEffect(() => {
         axios.get('http://localhost:5005/api/auth/getallusers')

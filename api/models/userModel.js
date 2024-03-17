@@ -3,9 +3,8 @@ const Mongoose = require("mongoose")
 const UserSchema = new Mongoose.Schema({
   email: {
     type: String,
-    unique: function() {
-      return this.role !== 'cashier'; // Make email unique unless the role is 'cashier'
-    }
+    unique: true, // Ensures uniqueness of email across all roles
+    required: true, // Make sure email is always provided
   },
   password: {
     type: String,
