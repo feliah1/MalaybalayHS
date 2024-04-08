@@ -48,7 +48,6 @@ export default function ItemInventory() {
                         </a>
 
                         <div className="navbar-nav w-100">
-                            <a href="/auth#" className="nav-item nav-link"><i className="fa fa-tachometer-alt me-2"></i><span style={{ color: "#ffffff" }}>Dashboard</span></a>
 
                             <a href="/iteminventory" className="nav-item nav-link active"><i className="fa fa-chart-line me-2"></i><span style={{ color: "#000000" }}>Item Inventory</span></a>
                             <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{ color: "#ffffff" }}>Order List</span></a>

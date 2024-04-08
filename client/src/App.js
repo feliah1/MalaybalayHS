@@ -33,8 +33,6 @@ function App() {
           {/**admin/cashier */}
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/free" element={<FreeComponent />} />
-          <Route path="/auth" element={<AuthComponent/>} />
           <Route  path="/iteminventory" element={<ItemInventory/>}/>
           <Route path="/itemsingle/:id" element={<ItemSingle/>}/>
           <Route path="/itemsinglecreate" element={<ItemSingleCreate />}/>

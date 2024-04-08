@@ -51,7 +51,6 @@ export default function CashierDelete(user) {
                     </a>
                   
                     <div class="navbar-nav w-100">
-                    <a href="/auth#" className="nav-item nav-link"><i className="fa fa-tachometer-alt me-2"></i><span style={{color:"#ffffff"}}>Dashboard</span></a>
                     <a href="/iteminventory" className="nav-item nav-link"><i className="fa fa-chart-line me-2"></i><span style={{color:"#ffffff"}}>Item Inventory</span></a>
                     <a href="/orderlist" className="nav-item nav-link"><i className="fa fa-times me-2"></i><span style={{color:"#ffffff"}}>Order List</span></a>
                     <a href="/settings" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i><span style={{color:"#ffffff"}}>Cashier Account</span></a>

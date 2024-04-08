@@ -49,7 +49,7 @@ export default function Login() {
           path: "/",
         });
         // redirect user to the auth page
-        window.location.href = "/auth";
+        window.location.href = "/iteminventory";
       })
       .catch((error) => {
         if (error.response) {
