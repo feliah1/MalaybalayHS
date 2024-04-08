@@ -5,8 +5,6 @@ import "./App.css";
 
 import Register from "./pages/register";
 import Login from "./pages/login";
-import FreeComponent from "./pages/freecomponent";
-import AuthComponent from "./pages/authcomponent";
 import ItemInventory from './pages/iteminventory';
 
 import OrderList from './pages/orderlist';
@@ -22,7 +20,6 @@ import ItemSingleDelete from './pages/itemsingle/singleProductDelete'
 import Settings from './pages/users/settings';
 import CashierDelete from './pages/users/cashierDelete';
 
-// import ProtectedRoutes from "./protectedRoutes";
 
 
 function App() {
