@@ -15,7 +15,7 @@ export default function OrderList() {
         window.location.href = "/";
     }
 
-    if (getCookie("userType").toLowerCase().toString() === "basic" ) {
+    if (getCookie("userType").toLowerCase().toString() === "basic") {
         window.location.href = "/";
         console.log("Basic user logged in. Must be admin");
     }
@@ -28,30 +28,18 @@ export default function OrderList() {
             .catch(err => console.log(err))
     }, [])
 
-    // function UpdateOrder(){ 
-             
-    //     const dataForm = {
-    //       orderStatus: orderStatus
-    //     }
-
-    //     axios.post(`http://localhost:5005/api/order/updateorder`, dataForm)
-    //       .then(res =>{
-    //         console.log('Response:', res);
-    //         setRedirectToOrder(true); // Set the state to redirect upon successful creation
-    //       }, [id])
-    //       console.log("click successful");
-    //   }
+    const handleFormSubmit = (orderId, newStatus) => {
+        // Send a request to update the order status
+        axios.post(`http://localhost:5005/api/order/updateorder`, { orderId, newStatus })
+            .then(res => {
+                console.log('Order status updated successfully:', res);
+                // Optionally, you can update the UI to reflect the new status
+            })
+            .catch(err => console.error('Error updating order status:', err));
+    };
     return (
         <>
             <div>
-                <div className="container-fluid position-relative d-flex p-0">
-                    {/* <!-- Spinner Start --> */}
-                    <div id="spinner" className=" bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-
-                    </div>
-                </div>
-                {/* <!-- Spinner End --> */}
-
 
                 {/* <!-- Sidebar Start --> */}
                 <div className="sidebar pe-4 pb-3">
@@ -139,12 +127,12 @@ export default function OrderList() {
 
 
                     {/* <!-- Blank Start --> */}
-                    <h5 style={{color:"white"}}>
-                        Check Order Logs: 
-                        <a  href="/orderlog"> 
-                            <button type="button" className="btn btn-primary btn-lg" style={{padding:"`40px"}} value="Order Logs"/> 
+                    <h5 style={{ color: "white" }}>
+                        Check Order Logs:
+                        <a href="/orderlog">
+                            <button type="button" className="btn btn-primary btn-lg" style={{ padding: "`40px" }} value="Order Logs" />
                         </a>
-                    </h5>  
+                    </h5>
 
                     <div className="container-fluid pt-4 px-4">
                         <div className="row vh-100 bg-secondary rounded justify-content-center mx-0">
@@ -164,41 +152,47 @@ export default function OrderList() {
                                                             <th>Status</th>
                                                         </tr>
                                                     </thead>
-                                            {
-                                                orders.map(order =>{
-                                                    return <tr className="text-center">
-                                                        <td>
-                                                            <p>{order.userOrderEmail}</p>
-                                                        </td>
-                                                        <td className="product-name">
-                                                            <p>{order.productOrderName}</p>
-                                                        </td>
-                                                        <td className="price">
-                                                            <p>{order.productOrderPrice}</p>
-                                                        </td>
-                                                        <td className="quantity">
-                                                            <p>{order.orderProductQuantity}</p>
-                                                        </td>
-                                                        <td className="total">
-                                                            <p>{order.OrderTotalPrice}</p>
-                                                        </td>
-                                                        <td>
-                                                        <form id="form1"><input type="hidden" name="id" value={order.orderStatus} />
-                                                        <select name="status" id="lang">
-                                                            <option value="waiting">waiting</option>
-                                                            <option value="accepted">accepted</option>
-                                                            <option value="rejected">rejected</option>
-                                                        </select>
-                                                            <input form="form1" type="submit" value="Save" />
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                    {/* <!-- END TR--> */}
+                                                    {
+                                                        orders.map(order => {
+                                                            return <tr className="text-center">
+                                                                <td>
+                                                                    <p>{order.userOrderEmail}</p>
+                                                                </td>
+                                                                <td className="product-name">
+                                                                    <p>{order.productOrderName}</p>
+                                                                </td>
+                                                                <td className="price">
+                                                                    <p>{order.productOrderPrice}</p>
+                                                                </td>
+                                                                <td className="quantity">
+                                                                    <p>{order.orderProductQuantity}</p>
+                                                                </td>
+                                                                <td className="total">
+                                                                    <p>{order.OrderTotalPrice}</p>
+                                                                </td>
+                                                                <td>
+                                                        {/* // Inside your orders.map() loop: */}
+                                                                    <form key={order.id} onSubmit={(e) => {
+                                                                        e.preventDefault();
+                                                                        const newStatus = e.target.elements.status.value;
+                                                                        handleFormSubmit(order.id, newStatus);
+                                                                    }}>
+                                                                        <input type="hidden" name="orderId" value={order.id} />
+                                                                        <select name="status" defaultValue={order.orderStatus}>
+                                                                            <option value="waiting">waiting</option>
+                                                                            <option value="accepted">accepted</option>
+                                                                            <option value="rejected">rejected</option>
+                                                                        </select>
+                                                                        <input type="submit" value="Save" />
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                            {/* <!-- END TR--> */ }
 
 
 
-                                                })
-                                                     }
+                                                        })
+                                                    }
                                                 </table>
                                             </div>
                                         </div>

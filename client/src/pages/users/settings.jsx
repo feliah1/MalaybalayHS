@@ -211,11 +211,11 @@ export default function Settings() {
                                                             variant="primary"
                                                             onClick={(e) => handleSubmit(e)}
                                                         >Create Account</button>
-                                                        {error && <p className="text-danger">{error}</p>}
-                                                        {register ? (
-                                                            <p className="text-success">Cashier Account added Successfully!</p>
+             
+                                                        {error && register ? (
+                                                            <p className="text-success">Cashier created Successfully</p>
                                                         ) : (
-                                                            <p className="text-danger"></p>
+                                                            <p className="text-danger">{error}</p>
                                                         )}
 
 

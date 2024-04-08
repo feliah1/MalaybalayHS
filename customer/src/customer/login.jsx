@@ -56,7 +56,7 @@ export default function Login() {
         if (error.response && error.response.status === 401) {
           setError("Invalid email or password");
         } else {
-          setError("An error occurred, please try again later");
+          setError("Invalid email or password");
         }
         console.error('Login failed:', error);
         setLogin(false); // Set login state to false on error
@@ -98,12 +98,10 @@ export default function Login() {
                     <label htmlFor="floatingPassword">Password</label>
                   </div>
 
-                  {error && <p className="text-danger">email or password is incorrect</p>} {/* Display error message */}
-                  
-                  {login ? (
+                  {error && login ? (
                     <p className="text-success">You Are Logged In Successfully</p>
                   ) : (
-                    <p className="text-danger"></p>
+                    <p className="text-danger">{error}</p>
                   )}
 
                   <button type="submit" className="btn btn-primary py-3 w-100 mb-4">Login</button>

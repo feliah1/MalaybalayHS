@@ -136,7 +136,7 @@ export default function ItemSingle(props) {
               pathname: `/itemsingleedit/${singleProduct._id}`,
               state: { ProductId: singleProduct._id }
               }}>
-              <a href="" className="btn btn-primary py-3 px-5">Edit Product</a>
+              <a href="" className="btn btn-black py-3 px-5 mr-2">Edit Product</a>
               </Link>
 
               <Link
@@ -144,7 +144,7 @@ export default function ItemSingle(props) {
               pathname: `/itemsingledelete/${singleProduct._id}`,
               state: { ProductId: singleProduct._id }
               }}>
-              <a href="" className="btn btn-black py-3 px-5 mr-2 ">Delete Product</a>
+              <a href="" className=" btn btn-primary py-3 px-5">Delete Product</a>
               </Link>
               </p>
     			</div>

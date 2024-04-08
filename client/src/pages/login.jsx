@@ -58,7 +58,7 @@ export default function Login() {
           if (error.response.status === 401) {
             setError("Invalid email or password");
           } else {
-            setError("An error occurred, please try again later");
+            setError("Invalid email or password");
           }
         } else if (error.request) {
           // The request was made but no response was received
@@ -105,12 +105,11 @@ export default function Login() {
                       />
                       <label htmlFor="floatingPassword">Password</label>
                     </div>
-                    {login ? (
+                    {error && login ? (
                       <p className="text-success">You Are Logged In Successfully</p>
                     ) : (
-                      <p className="text-danger"></p>
+                      <p className="text-danger">{error}</p>
                     )}
-                    {error && <p className="text-danger">email or password is incorrect</p>} {/* Display error message */}
                     
                     <button type="submit" className="btn btn-primary py-3 w-100 mb-4">Login</button>
                     

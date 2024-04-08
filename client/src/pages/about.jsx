@@ -121,10 +121,8 @@ export default function About() {
                         <div className="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
                             <div className=" text-center">
                                 <h3>About</h3>
-                            </div>
-                                <div className="row">
 
-                                    <div className="">
+                                <div className="">
                                         <div className="heading-section-bold mb-4 mt-md-5">
                                             <div className="ml-md-0">
                                                 <center><h2 className="mb-4">Established Sinced 2003</h2></center>
@@ -134,6 +132,9 @@ export default function About() {
                                             <p>It started when a mother from the mountain’s knocked on the door of the business owner, Ms. Perla Rubio. The mother is selling a hand-woven fabric so her family could have some food on the table. Even without any use of it, Ms. Perla started buying the fabrics just so she could help her feed the families in the mountain. Eventually, an idea came to her to make something out of the materials so she could provide a livelihood for the community. The idea of helping build the Malaybalay’s Choice Handicrafts and with the help of DOST project who supported the production of abaca-based choice handicraft called “Pinaksoy”, a binukid term that means “clothing, the business expand became the thriving social enterprise that showcases various products and accessories from abaca such as mats, slippers, wallets and bags.</p>
                                         </div>
                                     </div>
+                            </div>
+
+                                <div className="row">
                                 </div>
                             </div>
                         </div>
