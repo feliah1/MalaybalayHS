@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import placeholder from "./img/product_2.png"
 
 export default function ItemInventory() {
 
@@ -42,7 +41,7 @@ export default function ItemInventory() {
                 {/* <!-- Sidebar Start --> */}
                 <div className="sidebar pe-4 pb-3">
                     <nav className="navbar bg-quadrant navbar-dark">
-                        <a href="index.html" className="navbar-brand mx-4 mb-3">
+                        <a href="/iteminventory" className="navbar-brand mx-4 mb-3">
                             <h3 className="text-tertiary"><i className="#">
                             </i>Malaybalay<br />HandiShop</h3>
                         </a>
@@ -108,7 +107,7 @@ export default function ItemInventory() {
                                                                 state: { ProductId: product._id }
                                                             }}>
                                                             <div className="img-prod">
-															<a href="#" className="img-prod"><img className="img-fluid" src={placeholder} alt="Colorlib Template" />
+															<a href="#" className="img-prod"><img className="img-fluid" src="" />
 																<div className="overlay"></div>
 															</a>
                                                             </div>

@@ -4,14 +4,29 @@ import { Navigate } from 'react-router-dom';
 
 export default function ItemSingleCreate() {
 
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    if (!getCookie("userId") && !getCookie("userType")) {
+        window.location.href = "/";
+    }
+
+    if (getCookie("userType").toLowerCase().toString() === "basic" ) {
+        window.location.href = "/";
+        console.log("Basic user logged in. Must be admin");
+    }
+
     const [formData, setFormData] = useState({
         productName: '',
-        price: null,
+        price: '',
         description: '',
         category: '',
-        quantity: null,
+        quantity: '',
         productStatus: '',
-        productImage: null,
+        productImage: '',
         createdAt: new Date().toISOString()
     });
 
@@ -40,10 +55,41 @@ export default function ItemSingleCreate() {
             })
             .catch((error) => {
                 setLoading(false);
-                setError('Error creating product. Please try again.');
+                setError('Error creating product. Please try again.', error);
                 console.error('Error creating product:', error);
             });
+
+            
     };
+
+    // const convertToBase64 = () => {
+    //     const reader = new FileReader()
+    
+    //     reader.readAsDataURL(selectedFile)
+    
+    //     reader.onload = () => {
+    //       console.log('called: ', reader)
+    //       setBase64IMG(reader.result)
+    //     }
+    //   }
+    
+
+    //     // Get a reference to the file input
+    // const fileInput = document.querySelector('input');
+
+    // // Listen for the change event so we can capture the file
+    // fileInput.addEventListener('change', (e) => {
+    //     // Get a reference to the file
+    //     const file = e.target.files[0];
+
+    //     // Encode the file using the FileReader API
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         console.log(reader.result);
+    //         // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
+    //     };
+    //     reader.readAsDataURL(file);
+    // });
 
     const [showConfirmation, setShowConfirmation] = useState(false);
     const confirmationRef = useRef(null);
@@ -117,14 +163,14 @@ export default function ItemSingleCreate() {
 
                                     <form id="add-product-form" onSubmit={handleFinishCreating}>
                                         <div className="mb-3">
-                                            <label for="productName" className="form-label">Product Name:</label>
+                                            <label htmlFor="productName" className="form-label">Product Name:</label>
                                             <input type="text" className="form-control"
                                                 id="productName" name="productName"
                                                 value={formData.productName} onChange={handleChange}
                                                 required />
                                         </div>
                                         <div className="mb-3">
-                                            <label for="price" className="form-label">Price:</label>
+                                            <label htmlFor="price" className="form-label">Price:</label>
                                             <input type="number" className="form-control"
                                                 id="price" name="price"
                                                 min="0.01" step="0.01"
@@ -132,7 +178,7 @@ export default function ItemSingleCreate() {
                                                 required />
                                         </div>
                                         <div className="mb-3">
-                                            <label for="quantity" className="form-label">Quantity:</label>
+                                            <label htmlFor="quantity" className="form-label">Quantity:</label>
                                             <input type="number" className="form-control"
                                                 id="quantity" name="quantity"
                                                 min="0.01" step="0.01"
@@ -140,14 +186,14 @@ export default function ItemSingleCreate() {
                                                 required />
                                         </div>
                                         <div className="mb-3">
-                                            <label for="description" className="form-label">Description:</label>
+                                            <label htmlFor="description" className="form-label">Description:</label>
                                             <input type="text" className="form-control"
                                                 id="description" name="description"
                                                 value={formData.description} onChange={handleChange} style={{ minHeight: '100px', border: '1px solid #ccc', padding: '5px' }}
                                                 required />
                                         </div>
                                         <div className="mb-3">
-                                            <label for="category" className="form-label">Category:</label>
+                                            <label htmlFor="category" className="form-label">Category:</label>
                                             <select className="form-select" id="category"
                                                 name="category" value={formData.category}
                                                 onChange={handleChange}>
@@ -160,14 +206,14 @@ export default function ItemSingleCreate() {
                                             </select>
                                         </div>
                                         <div className="mb-3">
-                                            <label for="productImage" className="form-label">Image:</label>
+                                            <label htmlFor="productImage" className="form-label">Image:</label>
                                             <input type="file" className="form-control"
                                                 id="productImage" name="productImage" accept="image/*"
                                                 value={formData.productImage}
                                                 onChange={handleChange} required />
                                         </div>
                                         <div className="mb-3">
-                                            <label for="productStatus" className="form-label">Product Status:</label>
+                                            <label htmlFor="productStatus" className="form-label">Product Status:</label>
                                             <select className="form-select" id="productStatus"
                                                 name="productStatus" value={formData.productStatus}
                                                 onChange={handleChange}>

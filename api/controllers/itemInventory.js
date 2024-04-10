@@ -1,32 +1,48 @@
 const Product = require("../models/productModel");
-
 const mongoose = require('mongoose');
 
-//create product
+let stringify = require('json-stringify-safe');
+
+
+// Controller function to create product
 exports.createProduct = async (req, res, next) => {
-  const { productName, price, description, category, quantity, productStatus, productImage, createdAt = "0" } = req.body
-  try {
-    await Product.create({
-      productName,
-      price,
-      description,
-      category,
-      quantity,
-      productStatus,
-      productImage
-    }).then(product =>
+
+  var debugLogs = "";
+    // File upload successful, continue with product creation
+    const { productName, price, description, category, quantity, productStatus = "0" } = req.body;
+    
+    try {
+
+      const product = await Product.create({
+        productName,
+        price,
+        description,
+        category,
+        quantity,
+        productStatus,
+        productImage: req.body.productImage
+    
+      });
+
+      debugLogs += " " + "2" + " " + stringify(req.body.price) + " ";
       res.status(200).json({
         message: "Product successfully created",
         product,
-      })
-    )
-  } catch (err) {
-    res.status(401).json({
-      message: "Product not successful created",
-      error: err.message,
-    })
-  }
+      });
+    } catch (err) {
+      res.status(401).json({
+        message: "Product not successfully created",
+        error: err.message,
+      });
+
+
+    }
+
+    res.status(400).json({
+      error: debugLogs,
+    });
 }
+
 
 //find id of product to edit
 exports.editProduct = async (req, res, next) => {

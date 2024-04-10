@@ -5,6 +5,7 @@ const PORT = 5005;
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { adminAuth, userAuth } = require("./controllers/authController");
+var bodyParser = require('body-parser');
 
 //middleware
 app.use(cors({
@@ -17,8 +18,9 @@ app.use("/api/items", require("./routes/productRoute"))
 app.use("/api/cart", require("./routes/userCartRoute"))
 app.use("/api/order", require("./routes/orderRoute"))
 app.use(cookieParser());
-const multer = require('multer');
-const storage = multer.memoryStorage();
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 
 //route for login
 app.get("/admin", adminAuth, (req, res) => res.send("/auth"));

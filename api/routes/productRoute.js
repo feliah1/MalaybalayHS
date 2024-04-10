@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
+const multer = require('multer');
 const { createProduct, editProduct, deleteProduct, getAllProducts, getProductsByIds, getProduct, searchProduct } = require("../controllers/itemInventory")
 
-router.route("/createProd").post(createProduct)
+router.route("/createProd").post(createProduct);
 router.route("/searchProd").get(searchProduct)
 router.route("/editProd").post(editProduct)
 router.route("/deleteProd/:id").delete(deleteProduct)

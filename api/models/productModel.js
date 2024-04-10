@@ -19,11 +19,9 @@ const productSchema = new mongoose.Schema({
     productStatus: {
       type: String,
     },
-    productStatus2: {
-      type: String,
-    },
     productImage:{
-      type: Buffer 
+      type: Buffer ,
+      contentType: String
     },
     createdAt:{
       type: Date,
