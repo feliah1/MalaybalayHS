@@ -7,41 +7,36 @@ let stringify = require('json-stringify-safe');
 // Controller function to create product
 exports.createProduct = async (req, res, next) => {
 
-  var debugLogs = "";
-    // File upload successful, continue with product creation
-    const { productName, price, description, category, quantity, productStatus = "0" } = req.body;
-    
-    try {
+  // Extract product data from request body
+  const { productName, price, description, category, quantity, productStatus = "0" } = req.body;
 
-      const product = await Product.create({
-        productName,
-        price,
-        description,
-        category,
-        quantity,
-        productStatus,
-        productImage: req.body.productImage
-    
-      });
-
-      debugLogs += " " + "2" + " " + stringify(req.body.price) + " ";
-      res.status(200).json({
-        message: "Product successfully created",
-        product,
-      });
-    } catch (err) {
-      res.status(401).json({
-        message: "Product not successfully created",
-        error: err.message,
-      });
-
-
-    }
-
-    res.status(400).json({
-      error: debugLogs,
+  try {
+    // Attempt to create the product
+    const product = await Product.create({
+      productName,
+      price,
+      description,
+      category,
+      quantity,
+      productStatus,
+      productImage: req.body.productImage
     });
-}
+
+    // If product creation is successful, send success response
+    res.status(200).json({
+      message: "Product successfully created",
+      product,
+    });
+  } catch (err) {
+    // If an error occurs during product creation, handle it and send error response
+    debugLogs += " " + "2" + " " + stringify(req.body.price) + " ";
+    res.status(401).json({
+      message: "Product not successfully created",
+      error: err.message,
+      debugLogs: debugLogs // Send debug logs in the error response
+    });
+  }
+};
 
 
 //find id of product to edit
