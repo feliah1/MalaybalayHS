@@ -113,7 +113,7 @@ export default function Login() {
                     
                     <button type="submit" className="btn btn-primary py-3 w-100 mb-4">Login</button>
                     
-                    <p style={{ textAlign:'center' }}>Not the admin?  <a href="http://localhost:3001">Go to Cashier.</a></p>
+                    <p style={{ textAlign:'center' }}>Not the admin?  <a href="http://localhost:3001" style={{color:'red'}}>Go to Cashier.</a></p>
                     
                   </div>
                 </div>

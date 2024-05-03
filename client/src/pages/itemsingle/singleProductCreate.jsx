@@ -30,12 +30,35 @@ export default function ItemSingleCreate() {
         createdAt: new Date().toISOString()
     });
 
+
+    const [selectedFile, setSelectedFile] = useState(null);
+
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        if (e.target.name === 'productImage') {
+            const file = e.target.files[0]; // Get the selected file
+            setSelectedFile(file); // Store the selected file in state
+            if (file) {
+                convertToBase64(file); // Call the function to convert to base64
+            }
+        } else {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value,
+            });
+        }
     };
+
+    const convertToBase64 = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            setFormData({
+                ...formData,
+                productImage: reader.result // Set the base64 string to formData
+            });
+        };
+    };  
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
@@ -61,35 +84,6 @@ export default function ItemSingleCreate() {
 
             
     };
-
-    // const convertToBase64 = () => {
-    //     const reader = new FileReader()
-    
-    //     reader.readAsDataURL(selectedFile)
-    
-    //     reader.onload = () => {
-    //       console.log('called: ', reader)
-    //       setBase64IMG(reader.result)
-    //     }
-    //   }
-    
-
-    //     // Get a reference to the file input
-    // const fileInput = document.querySelector('input');
-
-    // // Listen for the change event so we can capture the file
-    // fileInput.addEventListener('change', (e) => {
-    //     // Get a reference to the file
-    //     const file = e.target.files[0];
-
-    //     // Encode the file using the FileReader API
-    //     const reader = new FileReader();
-    //     reader.onloadend = () => {
-    //         console.log(reader.result);
-    //         // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
-    //     };
-    //     reader.readAsDataURL(file);
-    // });
 
     const [showConfirmation, setShowConfirmation] = useState(false);
     const confirmationRef = useRef(null);
@@ -209,7 +203,6 @@ export default function ItemSingleCreate() {
                                             <label htmlFor="productImage" className="form-label">Image:</label>
                                             <input type="file" className="form-control"
                                                 id="productImage" name="productImage" accept="image/*"
-                                                value={formData.productImage}
                                                 onChange={handleChange} required />
                                         </div>
                                         <div className="mb-3">
