@@ -250,45 +250,46 @@ export default function Settings() {
                     </div>
 
                     <div className="container-fluid pt-4 px-4">
-                        <div className="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                        <div className="row vh-100 bg-secondary rounded  justify-content-center mx-0">
                             <div className=" text-center">
                                 <h3>Cashier Accounts:</h3>
-                            </div>
-                            <div className="row">
 
-                                <div className="">
-                                    <table className="table">
-                                        <thead className="thead-primary">
-                                            <tr className="">
-                                                <th>Cashier</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        {
-                                            users && users.map(user => (
-                                                <tr className="text-center">
-                                                    <td action="/deleteUser/<%= user._id %>" method="POST">
-                                                        <p>{user.email}</p>
-                                                    </td>
-                                                    <td>
-                                                        <form id="form1"><input type="hidden" name="id" value='' />
-                                                        <Link
-                                                            to={{
-                                                                pathname: `/deletecashier/${user._id}`,
-                                                                state: { UserId: user._id }
-                                                            }}
-                                                        >
-                                                            <button className="btn btn-danger">Delete User</button>
-                                                        </Link>
-                                                            <input form="form1" type="submit" value="Edit Account" />
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        }
-                                        {/* <!-- END TR--> */}
-                                    </table>
-                                </div>
+                                    <div className="row">
+
+                                        <div className="">
+                                            <table className="table">
+                                                <thead className="thead-primary">
+                                                    <tr className="">
+                                                        <th>Cashier</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                {
+                                                    users && users.map(user => (
+                                                        <tr className="text-center">
+                                                            <td action="/deleteUser/<%= user._id %>" method="POST">
+                                                                <p>{user.email}</p>
+                                                            </td>
+                                                            <td>
+                                                                <form id="form1"><input type="hidden" name="id" value='' />
+                                                                <Link
+                                                                    to={{
+                                                                        pathname: `/deletecashier/${user._id}`,
+                                                                        state: { UserId: user._id }
+                                                                    }}
+                                                                >
+                                                                    <button className="btn btn-danger">Delete User</button>
+                                                                </Link>
+                                                                    <input form="form1" type="submit" value="Edit Account" />
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                }
+                                                {/* <!-- END TR--> */}
+                                            </table>
+                                        </div>
+                                        </div>
                             </div>
                         </div>
                     </div>
