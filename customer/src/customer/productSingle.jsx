@@ -136,7 +136,10 @@ export default function SingleProduct (){
             
             {redirectToCart && <Navigate to="/cart" />}
             {redirectToOrder && <Navigate to="/order" />}
-          	<p><a onClick={onClick} className="btn btn-black py-3 px-5 mr-2">Add to Cart</a><a onClick={orderProduct} className="btn btn-primary py-3 px-5">Buy now</a></p>
+          	<p>
+              {/* <a onClick={onClick} className="btn btn-black py-3 px-5 mr-2">Add to Cart</a> */}
+              <a onClick={orderProduct} className="btn btn-primary py-3 px-5">Buy now</a>
+            </p>
     			</div>
     		</div>
 

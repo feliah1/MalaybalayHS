@@ -59,7 +59,6 @@ export default function OrderList() {
                 </div>
                 {/* <!-- Sidebar End --> */}
 
-
                 {/* <!-- Content Start --> */}
                 <div className="content">
                     {/* <!-- Navbar Start --> */}
@@ -124,14 +123,7 @@ export default function OrderList() {
                     </nav>
                     {/* <!-- Navbar End --> */}
 
-
                     {/* <!-- Blank Start --> */}
-                    <h5 style={{ color: "white" }}>
-                        Check Order Logs:
-                        <a href="/orderlog">
-                            <button type="button" className="btn btn-primary btn-lg" style={{ padding: "`40px" }} value="Order Logs" />
-                        </a>
-                    </h5>
 
                     <div className="container-fluid pt-4 px-4">
                         <div className="row vh-100 bg-secondary rounded justify-content-center mx-0">
@@ -148,7 +140,6 @@ export default function OrderList() {
                                                             <th>Price</th>
                                                             <th>Quantity</th>
                                                             <th>Total</th>
-                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     {
@@ -169,8 +160,7 @@ export default function OrderList() {
                                                                 <td className="total">
                                                                     <p>{order.OrderTotalPrice}</p>
                                                                 </td>
-                                                                <td>
-                                                        {/* // Inside your orders.map() loop: */}
+                                                                {/* <td>
                                                                     <form key={order.id} onSubmit={(e) => {
                                                                         e.preventDefault();
                                                                         const newStatus = e.target.elements.status.value;
@@ -184,7 +174,7 @@ export default function OrderList() {
                                                                         </select>
                                                                         <input type="submit" value="Save" />
                                                                     </form>
-                                                                </td>
+                                                                </td> */}
                                                             </tr>
                                                             {/* <!-- END TR--> */ }
 

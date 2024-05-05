@@ -59,34 +59,20 @@ export default function Home() {
 											products.map(product => {
 
 												return <div className="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
-													<div className="product d-flex flex-column">
+													<div className="product d-flex flex-column btn btn-primary py-3 px-5">
 														<Link
 															to={{
 																pathname: `/productSingle/${product._id}`,
 																state: { ProductId: product._id }
 															}}
 														>
-															<a href="#" className="img-prod"><img className="img-fluid" src={placeholder} alt="Colorlib Template" />
-																<div className="overlay"></div>
-															</a>
 															<div className="text py-3 pb-4 px-3">
-																<div className="d-flex">
-																	<div className="rating">
-																		<p className="text-right mb-0">
-																			<a href="#"><span className="ion-ios-star-outline"></span></a>
-																			<a href="#"><span className="ion-ios-star-outline"></span></a>
-																			<a href="#"><span className="ion-ios-star-outline"></span></a>
-																			<a href="#"><span className="ion-ios-star-outline"></span></a>
-																			<a href="#"><span className="ion-ios-star-outline"></span></a>
-																		</p>
-																	</div>
-																</div>
 																<h3><a href="/productSingle">{product.productName}</a></h3>
 																<div className="pricing">
 																	<p className="price"><span>P{product.price}</span></p>
 																</div>
 																<p className="bottom-area d-flex px-3">
-																	<a href="/productSingle" className="buy-now text-center py-2">info<span><i className="ion-ios-cart ml-1"></i></span></a>
+																	{/* <a href="/productSingle" className="buy-now text-center py-2">info<span><i className="ion-ios-cart ml-1"></i></span></a> */}
 																</p>
 															</div>
 														</Link>

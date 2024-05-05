@@ -83,7 +83,6 @@ export default function Order() {
 									<table className="table">
 										<thead className="thead-primary">
 											<tr className="">
-												<th>&nbsp;</th>
 												<th>Product</th>
 												<th>Price</th>
 												<th>Quantity</th>
@@ -93,7 +92,7 @@ export default function Order() {
 											{
 											userOrderProducts.map(order => {
 												return <tr className="text-center">
-														<td className="product-remove"><a href="#" value="cancel"><span className="ion-ios-close" onClick={deleteOrder} id={userId}></span></a></td>
+														{/* <td className="product-remove"><a href="#" value="cancel"><span className="ion-ios-close" onClick={deleteOrder} id={userId}></span></a></td> */}
 														<td className="product-name">
 															<h3>{order.productName}</h3>
 														</td>
@@ -101,7 +100,7 @@ export default function Order() {
 														<td className="price">{order.productPrice}</td>
 
 														<td className="quantity">
-															<div className="input-group mb-3">
+															<div className="product-name">
 																<p>{order.orderProductQuantity}</p>
 															</div>
 														</td>
