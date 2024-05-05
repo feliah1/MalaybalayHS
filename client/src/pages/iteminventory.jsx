@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { Buffer } from 'buffer'; 
 
 export default function ItemInventory() {
 
@@ -22,10 +23,17 @@ export default function ItemInventory() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5005/api/items/getAllProd')
-            .then(products => setProducts(products.data))
-            .catch(err => console.log(err))
-    }, [])
+      axios.get('http://localhost:5005/api/items/getAllProd')
+        .then(response => {
+          const products = response.data.map(product => ({
+            ...product,
+            productImage: `data:${product.productImage.contentType};base64,${Buffer.from(product.productImage.data).toString('base64')}`
+          }));
+          setProducts(products);
+        })
+        .catch(err => console.error(err));
+    }, []);
+
     return (
         <>
             <div>
@@ -97,34 +105,38 @@ export default function ItemInventory() {
                                     <div className="row">
 
                                         {/* rows to duplicate and get items in database */}
-                                        {
-                                            products.map(product => (
-                                                <div key={product._id} className="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex" style={{ marginTop: "38px" }}>
-                                                    <div className="product d-flex flex-column">
-                                                        <Link
-                                                            to={{
-                                                                pathname: `/itemsingle/${product._id}`,
-                                                                state: { ProductId: product._id }
-                                                            }}>
-                                                            <div className="img-prod">
-															<a href="#" className="img-prod"><img className="img-fluid" src="" />
-																<div className="overlay"></div>
-															</a>
+                                            {
+                                                products.map(product => {
+                                                    console.log("Product Image:",product.productImage); // Log the productImage
+                                                    return (
+                                                        <div key={product._id} className="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex" style={{ marginTop: "38px" }}>
+                                                            <div className="product d-flex flex-column">
+                                                                <Link
+                                                                    to={{
+                                                                        pathname: `/itemsingle/${product._id}`,
+                                                                        state: { ProductId: product._id }
+                                                                    }}>
+                                                                    <div className="img-prod">
+                                                                        <a href="#" className="img-prod">
+                                                                            <img className="img-fluid" src={product.productImage} alt="Product" />
+                                                                            <div className="overlay"></div>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div className="text py-3 pb-4 px-3">
+                                                                        <h3>{product.productName}</h3>
+                                                                        <div className="pricing">
+                                                                            <p className="price"><span>P{product.price}</span></p>
+                                                                        </div>
+                                                                        <p className="bottom-area d-flex px-3">
+                                                                            <span className="buy-now text-center py-2">info<span><i className="ion-ios-cart ml-1"></i></span></span>
+                                                                        </p>
+                                                                    </div>
+                                                                </Link>
                                                             </div>
-                                                            <div className="text py-3 pb-4 px-3">
-                                                                <h3>{product.productName}</h3>
-                                                                <div className="pricing">
-                                                                    <p className="price"><span>P{product.price}</span></p>
-                                                                </div>
-                                                                <p className="bottom-area d-flex px-3">
-                                                                    <span className="buy-now text-center py-2">info<span><i className="ion-ios-cart ml-1"></i></span></span>
-                                                                </p>
-                                                            </div>
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        }
+                                                        </div>
+                                                    );
+                                                })
+                                            }
                                         {/* end of rows */}
                                     </div>
                                 </div>

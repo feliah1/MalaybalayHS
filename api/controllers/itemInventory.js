@@ -38,7 +38,6 @@ exports.createProduct = async (req, res, next) => {
   }
 };
 
-
 //find id of product to edit
 exports.editProduct = async (req, res, next) => {
   const {

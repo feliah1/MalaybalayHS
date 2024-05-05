@@ -31,33 +31,41 @@ export default function ItemSingleCreate() {
     });
 
 
-    const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
 
-    const handleChange = (e) => {
-        if (e.target.name === 'productImage') {
-            const file = e.target.files[0]; // Get the selected file
-            setSelectedFile(file); // Store the selected file in state
-            if (file) {
-                convertToBase64(file); // Call the function to convert to base64
-            }
-        } else {
-            setFormData({
-                ...formData,
-                [e.target.name]: e.target.value,
-            });
-        }
-    };
+  const handleChange = (e) => {
+    if (e.target.name === 'productImage') {
+      const file = e.target.files[0];
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setError('Invalid file type. Please select an image.');
+        return;
+      }
+      setSelectedFile(file);
+      setPreviewImage(URL.createObjectURL(file)); // Create preview URL
+      convertToBase64(file);
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
 
     const convertToBase64 = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-            setFormData({
-                ...formData,
-                productImage: reader.result // Set the base64 string to formData
-            });
+        setFormData({
+            ...formData,
+            productImage: reader.result,
+        });
         };
-    };  
+        reader.onerror = (error) => {
+        setError('Error converting image to base64: ' + error.message);
+        };
+    };
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -201,9 +209,18 @@ export default function ItemSingleCreate() {
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="productImage" className="form-label">Image:</label>
-                                            <input type="file" className="form-control"
-                                                id="productImage" name="productImage" accept="image/*"
-                                                onChange={handleChange} required />
+                                            <input
+                                            type="file"
+                                            className="form-control"
+                                            id="productImage"
+                                            name="productImage"
+                                            accept="image/*"
+                                            onChange={handleChange}
+                                            required
+                                            />
+                                            {previewImage && (
+                                            <img src={previewImage} alt="Selected Image Preview" className="img-preview" />
+                                            )}
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="productStatus" className="form-label">Product Status:</label>
