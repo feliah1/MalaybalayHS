@@ -1,43 +1,35 @@
 const Product = require("../models/productModel");
-const mongoose = require('mongoose');
-
-let stringify = require('json-stringify-safe');
-
+const mongoose = require("mongoose");
 
 // Controller function to create product
 exports.createProduct = async (req, res, next) => {
+    // Extract product data from request body
+    const { productName, price, description, category, quantity, productStatus = "0" } = req.body;
 
-  // Extract product data from request body
-  const { productName, price, description, category, quantity, productStatus = "0" } = req.body;
+    try {
+        // Attempt to create the product
+        const product = await Product.create({
+            productName,
+            price,
+            description,
+            category,
+            quantity,
+            productStatus,
+        });
 
-  try {
-    // Attempt to create the product
-    const product = await Product.create({
-      productName,
-      price,
-      description,
-      category,
-      quantity,
-      productStatus,
-      productImage: req.body.productImage
-    });
-
-    // If product creation is successful, send success response
-    res.status(200).json({
-      message: "Product successfully created",
-      product,
-    });
-  } catch (err) {
-    // If an error occurs during product creation, handle it and send error response
-    debugLogs += " " + "2" + " " + stringify(req.body.price) + " ";
-    res.status(401).json({
-      message: "Product not successfully created",
-      error: err.message,
-      debugLogs: debugLogs // Send debug logs in the error response
-    });
-  }
+        // If product creation is successful, send success response
+        res.status(200).json({
+            message: "Product successfully created",
+            product,
+        });
+    } catch (err) {
+        // If an error occurs during product creation, handle it and send error response
+        res.status(401).json({
+            message: "Product not successfully created",
+            error: err.message,
+        });
+    }
 };
-
 //find id of product to edit
 exports.editProduct = async (req, res, next) => {
   const {
@@ -48,7 +40,6 @@ exports.editProduct = async (req, res, next) => {
     category,
     quantity,
     productStatus,
-    productImage,
     createdAt
   } = req.body;
 
@@ -72,10 +63,6 @@ exports.editProduct = async (req, res, next) => {
     if (category) product.category = category;
     if (quantity) product.quantity = quantity;
     if (productStatus) product.productStatus = productStatus;
-    if (productImage !== undefined) {
-      product.productImage = productImage;
-    }
-``
     if (createdAt) product.createdAt = createdAt;
 
     // Save the updated product

@@ -67,7 +67,6 @@ export default function ItemSingleEdit() {
           category: itemData.category,
           quantity: itemData.quantity,
           productStatus: itemData.productStatus,
-          productImage: itemData.productImage,
           createdAt: itemData.createdAt
         });
       })
@@ -196,13 +195,6 @@ export default function ItemSingleEdit() {
                         <option value="accessories">Accessories</option>
                         <option value="others">Others</option>
                       </select>
-                    </div>
-                    <div class="mb-3">
-                      <label for="productImage" class="form-label">Image:</label>
-                      <input type="file" class="form-control"
-                        id="productImage" name="productImage" accept="image/*"
-                        value={formData.productImage}
-                        onChange={handleChange} required />
                     </div>
                     <div class="mb-3">
                       <label for="productStatus" class="form-label">Product Status:</label>

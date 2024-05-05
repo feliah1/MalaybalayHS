@@ -26,45 +26,15 @@ export default function ItemSingleCreate() {
         category: '',
         quantity: '',
         productStatus: '',
-        productImage: '',
         createdAt: new Date().toISOString()
     });
 
-
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
-
   const handleChange = (e) => {
-    if (e.target.name === 'productImage') {
-      const file = e.target.files[0];
-      // Validate file type
-      if (!file.type.startsWith('image/')) {
-        setError('Invalid file type. Please select an image.');
-        return;
-      }
-      setSelectedFile(file);
-      setPreviewImage(URL.createObjectURL(file)); // Create preview URL
-      convertToBase64(file);
-    } else {
+
       setFormData({
         ...formData,
         [e.target.name]: e.target.value,
       });
-    }
-  };
-
-    const convertToBase64 = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-        setFormData({
-            ...formData,
-            productImage: reader.result,
-        });
-        };
-        reader.onerror = (error) => {
-        setError('Error converting image to base64: ' + error.message);
-        };
     };
 
     const [loading, setLoading] = useState(false);
@@ -206,21 +176,6 @@ export default function ItemSingleCreate() {
                                                 <option value="accessories">Accessories</option>
                                                 <option value="others">Others</option>
                                             </select>
-                                        </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="productImage" className="form-label">Image:</label>
-                                            <input
-                                            type="file"
-                                            className="form-control"
-                                            id="productImage"
-                                            name="productImage"
-                                            accept="image/*"
-                                            onChange={handleChange}
-                                            required
-                                            />
-                                            {previewImage && (
-                                            <img src={previewImage} alt="Selected Image Preview" className="img-preview" />
-                                            )}
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="productStatus" className="form-label">Product Status:</label>
